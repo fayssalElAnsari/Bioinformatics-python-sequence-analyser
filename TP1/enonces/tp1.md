@@ -53,14 +53,14 @@ Descendez jusqu’à la ligne qui commence par `FEATURES`. Un certain nombre d�
 
 3.  L’identifiant numérique de ce gène ***/db_xref="GeneID:11435"***
 
-4.  Le nombre d’exons ***9*** (1..94; 95..240; 241..285; 286..395; 396..591; 592..829; 830..1053; 1054..1293; 1294..4320)
+4.  Le nombre d’exons ***sont 9 : (1..94; 95..240; 241..285; 286..395; 396..591; 592..829; 830..1053; 1054..1293; 1294..4320)**
 
 
 Enfin la séquence ADN de l’ARNm est présente à la fin du fichier. La séquence est écrite sous forme de blocs de 10 nucléotides séparées par une espace, mais ce format n’est pas le plus simple pour la manipulation des séquences.
 
 ### Formats de données
 
-Nous allons visualiser cette entrée sous un autre format. Revenez tout en haut de la page. Cliquez à l’endroit où se trouve un lien _GenBank_ (au dessus du nom de l’ARNm) et choisissez le format _Fasta (text)_.
+Nous allons visualiser cette entrée sous un autre format. Revenez tout en haut de la page. Cliquez à l’endroit où se trouve un lien _GenBank_ (au dessus du nom de l’ARNm) et choisissez le format _Fasta (text)_.***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5?report=fasta)***
 
 S’affiche alors la séquence de l’ARNm au format FASTA, un format texte simple dans lequel les lignes commençant par `>` décrivent la séquence écrite sur les lignes suivantes (les sauts de ligne dans la séquence n’ont pas de signification particulière). Ce format est très utilisé en bioinformatique pour travailler sur les séquences.
 
