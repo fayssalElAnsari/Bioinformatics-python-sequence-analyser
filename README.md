@@ -1,0 +1,4 @@
+# BioInfo-TPs-EL_ANSARI-PASTOR_ROJAS 
+
+PASTOR ROJAS angel daniel
+EL ANSARI Fayssal
