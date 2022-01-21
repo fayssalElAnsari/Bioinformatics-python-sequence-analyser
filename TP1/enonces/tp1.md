@@ -26,9 +26,11 @@ Une fois la recherche validée, vous devez obtenir quelques milliers de résulta
 
 ### Filtrer les résultats
 
-1.  Parmi les organismes disponibles, sélectionner la souris (_Mus musculus_), sur la droite de la page, dans _Top organisms_, cliquez sur _More…_ pour voir plus d’organismes. Constatez que cela modifie votre champ de recherche pour y ajouter cette contrainte.
+1.  Parmi les organismes disponibles, sélectionner la souris (_Mus musculus_), sur la droite de la page, dans _Top organisms_, cliquez sur _More…_ pour voir plus d’organismes (s'il n'apparaît pas cliquez sur *All other taxa*). Constatez que cela modifie votre champ de recherche pour y ajouter cette contrainte.
+<!-- Dans la barre de recherche de nucleotilde du site ncbi:  
+((CHRNA1) NOT "Sus scrofa"[porgn:__txid9823] NOT "Nothobranchius furzeri"[porgn:__txid105023] NOT "Aotus nancymaae"[porgn:__txid37293] NOT "Conepatus sp."[porgn:__txid1566867] NOT "Pan troglodytes"[porgn:__txid9598] NOT "Ursus maritimus"[porgn:__txid29073] NOT "Canis lupus"[porgn:__txid9612] NOT "Ursus arctos"[porgn:__txid9644] NOT "Paragalago zanzibaricus"[porgn:__txid2604443] NOT "Aotus azarai"[porgn:__txid30591] NOT "Eubalaena australis"[porgn:__txid160595] NOT "Homo sapiens"[porgn:__txid9606] NOT "Paragalago cocos"[porgn:__txid2604442] NOT "Delphinus capensis"[porgn:__txid103584] NOT "Nyctereutes procyonoides"[porgn:__txid34880] NOT "Loxodonta cyclotis"[porgn:__txid99490] NOT "Balaenoptera bonaerensis"[porgn:__txid33556] NOT "Delphinus delphis"[porgn:__txid9728] NOT "Megaptera novaeangliae"[porgn:__txid9773] NOT "Loxodonta africana"[porgn:__txid9785]) AND "Mus musculus"[porgn:__txid10090] -->
 
-2.  Nous voulons nous intéresser ici à un ARN messager (ARNm, ou _mRNA_ en anglais) du gène CHRNA1. Ne conservez que les ARNm en choisissant l’entrée correspondante (à gauche de la page).
+2.  Nous voulons nous intéresser ici à un ARN messager (ARNm, ou _mRNA_ en anglais) du gène CHRNA1. Ne conservez que les ARNm en choisissant l’entrée correspondante (à gauche de la page). ***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5)***
 
 3.  Enfin, ne conservez que les résultats provenant de RefSeq (à gauche de la page), qui ne contient que des données vérifiées sans doublon.
 
