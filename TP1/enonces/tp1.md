@@ -27,15 +27,13 @@ Une fois la recherche validée, vous devez obtenir quelques milliers de résulta
 ### Filtrer les résultats
 
 1.  Parmi les organismes disponibles, sélectionner la souris (_Mus musculus_), sur la droite de la page, dans _Top organisms_, cliquez sur _More…_ pour voir plus d’organismes (s'il n'apparaît pas cliquez sur *All other taxa*). Constatez que cela modifie votre champ de recherche pour y ajouter cette contrainte.
-<!-- Dans la barre de recherche de nucleotilde du site ncbi:  
-((CHRNA1) NOT "Sus scrofa"[porgn:__txid9823] NOT "Nothobranchius furzeri"[porgn:__txid105023] NOT "Aotus nancymaae"[porgn:__txid37293] NOT "Conepatus sp."[porgn:__txid1566867] NOT "Pan troglodytes"[porgn:__txid9598] NOT "Ursus maritimus"[porgn:__txid29073] NOT "Canis lupus"[porgn:__txid9612] NOT "Ursus arctos"[porgn:__txid9644] NOT "Paragalago zanzibaricus"[porgn:__txid2604443] NOT "Aotus azarai"[porgn:__txid30591] NOT "Eubalaena australis"[porgn:__txid160595] NOT "Homo sapiens"[porgn:__txid9606] NOT "Paragalago cocos"[porgn:__txid2604442] NOT "Delphinus capensis"[porgn:__txid103584] NOT "Nyctereutes procyonoides"[porgn:__txid34880] NOT "Loxodonta cyclotis"[porgn:__txid99490] NOT "Balaenoptera bonaerensis"[porgn:__txid33556] NOT "Delphinus delphis"[porgn:__txid9728] NOT "Megaptera novaeangliae"[porgn:__txid9773] NOT "Loxodonta africana"[porgn:__txid9785]) AND "Mus musculus"[porgn:__txid10090] -->
 
-2.  Nous voulons nous intéresser ici à un ARN messager (ARNm, ou _mRNA_ en anglais) du gène CHRNA1. Ne conservez que les ARNm en choisissant l’entrée correspondante (à gauche de la page). ***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5)***
+2.  Nous voulons nous intéresser ici à un ARN messager (ARNm, ou _mRNA_ en anglais) du gène CHRNA1. Ne conservez que les ARNm en choisissant l’entrée correspondante (à gauche de la page).
 
 3.  Enfin, ne conservez que les résultats provenant de RefSeq (à gauche de la page), qui ne contient que des données vérifiées sans doublon.
 
 
-Il ne reste plus qu’un seul résultat, c’est celui qui nous intéresse.
+Il ne reste plus qu’un seul résultat, c’est celui qui nous intéresse.***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5)***
 
 Nous n’arrivons pas toujours à un seul résultat avec cette démarche, il peut par exemple y avoir plusieurs ARNm pour un même gène, ou alors le nom du gène peut être présent sans que la molécule vienne de ce gène, dans ce cas il aurait fallu raffiner la recherche en précisant que `CHRNA1` était le nom du gène, en notant `CHRNA1[gene name]`.
 
@@ -43,19 +41,19 @@ Nous n’arrivons pas toujours à un seul résultat avec cette démarche, il peu
 
 Une entrée possède de nombreuses informations la décrivant mais également détaillant comment la séquence a été identifiée. Le format utilisé pour cette description est un format texte appelé _GenBank_ ([documentation](https://www.ncbi.nlm.nih.gov/genbank/samplerecord/)).
 
-Sur la première ligne, commençant par `LOCUS` on a notamment l’identifiant de cet ARN messager (commençant par `NM_`), sa taille en nucléotides, le type de molécule.
+Sur la première ligne, commençant par `LOCUS` on a notamment l’identifiant de cet ARN messager (commençant par `NM_`) ***NM_007389***, sa taille en nucléotides ***4320***, le type de molécule ***mRNA***.
 
 Un peu plus bas, la ligne commençant par `ORGANISM` confirme qu’il s’agit bien d’une séquence identifiée chez des souris. Ensuite de nombreuses lignes correspondent aux références des articles scientifiques ayant participé à la mise en évidence de cet ARN messager et de ses caractéristiques.
 
 Descendez jusqu’à la ligne qui commence par `FEATURES`. Un certain nombre d’informations sont visibles. Identifiez :
 
-1.  Le chromosome où le gène codant cet ARNm est présent
+1.  Le chromosome où le gène codant cet ARNm est présent ***/chromosome="2"***
 
-2.  Un autre nom pour le gène CHRNA1
+2.  Un autre nom pour le gène CHRNA1 ***/gene_synonym="Achr-1; Acra; AI385656; AI608266"***
 
-3.  L’identifiant numérique de ce gène
+3.  L’identifiant numérique de ce gène ***/db_xref="GeneID:11435"***
 
-4.  Le nombre d’exons
+4.  Le nombre d’exons ***9*** (1..94; 95..240; 241..285; 286..395; 396..591; 592..829; 830..1053; 1054..1293; 1294..4320)
 
 
 Enfin la séquence ADN de l’ARNm est présente à la fin du fichier. La séquence est écrite sous forme de blocs de 10 nucléotides séparées par une espace, mais ce format n’est pas le plus simple pour la manipulation des séquences.
