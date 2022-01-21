@@ -9,3 +9,5 @@ exemple le premier:
 séquence codante commence :
 /inference="alignment:Splign:2.1.0"
      **CDS**             52..1425
+
+https://www.ensembl.org/Multi/Tools/Blast
