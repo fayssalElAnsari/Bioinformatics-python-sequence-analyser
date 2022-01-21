@@ -108,16 +108,15 @@ Cette API peut être utilisée en accédant directement à certaines URL ou, via
 
 Renouvelez ce que nous avons fait précédemment mais en utilisant cette API :
 
-Effectuez la recherche avec `esearch` (sans les filtres), sur la base de données `nucleotide` (attention à bien remplacer `MY_DB` et `MY_TERM` dans l’URL donnée en exemple).
+Effectuez la recherche avec `esearch` (sans les filtres), sur la base de données `nucleotide` (attention à bien remplacer `MY_DB` et `MY_TERM` dans l’URL donnée en exemple).[Ici](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch/esearch.fcgi?db=nucleotide&term=Chrna1)
 
-Quel est le format obtenu ? Combien de résultats y a-t-il au total (pas seulement ceux affichés) ?  
-```
+Quel est le format obtenu ?  ***XML***
+Combien de résultats y a-t-il au total (pas seulement ceux affichés) ?  ***2560***
 
-```
+Afin d’appliquer les mêmes filtres que précédemment il faudra indiquer comme terme de recherche `Chrna1 AND biomol_mrna[PROP] AND refseq[filter] AND "Mus musculus"[Organism]`.***[Ici](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch/esearch.fcgi?db=nucleotide&term=Chrna1%20AND%20biomol_mrna[PROP]%20AND%20refseq[filter]%20AND%20%22Mus%20musculus%22[Organism]) 
+Quel est l’identifiant du résultat obtenu ? ***425905338***
 
-Afin d’appliquer les mêmes filtres que précédemment il faudra indiquer comme terme de recherche `Chrna1 AND biomol_mrna[PROP] AND refseq[filter] AND "Mus musculus"[Organism]`. Quel est l’identifiant du résultat obtenu ?
-
-Utilisez maintenant `efetch` pour récupérer l’entrée correspondante dans cette banque de données. Récupérez l’entrée au format GenBank (`gb`) puis FASTA (`fasta`) (ce qui remplace `MY_TYPE`, qui est le type de format de données).
+Utilisez maintenant `efetch` pour récupérer l’entrée correspondante dans cette banque de données. Récupérez l’entrée au format GenBank (`gb`) puis FASTA (`fasta`) (ce qui remplace `MY_TYPE`, qui est le type de format de données).  ***[Ici pour gb](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=gb); [Ici pour fasta](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=fasta)***
 
 Réessayez en remplaçant l’identifiant par le numéro d’accession de la molécule (commençant par `NM_`). Obtenez-vous la même chose ?  
 ```
