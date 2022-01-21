@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" lang=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Département informatique – Université de Lille">
+  <title>TP1 - Appréhender des séquences biologiques</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="TP1%20-%20Appr%C3%A9hender%20des%20s%C3%A9quences%20biologiques_files/tufte.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">TP1 - Appréhender des séquences biologiques</h1>
+<p class="author">Département informatique – Université de Lille</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#étudier-une-séquence-arn">Étudier une séquence ARN</a>
+<ul>
+<li><a href="#filtrer-les-résultats">Filtrer les résultats</a></li>
+<li><a href="#comprendre-une-entrée">Comprendre une entrée</a></li>
+<li><a href="#formats-de-données">Formats de données</a></li>
+<li><a href="#au-delà-du-transcrit">Au-delà du transcrit</a></li>
+</ul></li>
+<li><a href="#utiliser-lapi">Utiliser l’API</a></li>
+<li><a href="#sites-de-fixation-des-facteurs-de-transcription">Sites de fixation des facteurs de transcription</a></li>
+</ul>
+</nav>
+<p>Plusieurs banques de données internationales centralisent les 
+séquences biologiques obtenues par des scientifiques autour du monde.</p>
+<p>Nous allons ici nous concentrer sur le <a href="https://www.ncbi.nlm.nih.gov/">NCBI</a>
+ (National Center for Biology Information), le centre de bioinformatique
+ des États-Unis d’Amérique. Ce centre pointe vers de nombreuses 
+ressources : des séquences ADN ou ARN, des séquences protéiques, des 
+articles scientifiques, des livres…</p>
+<p>Ici nous allons aller sur <a href="https://www.ncbi.nlm.nih.gov/nuccore">le site qui correspond aux séquences nucléotidiques</a> (ADN ou ARN).</p>
+<h2 id="étudier-une-séquence-arn">Étudier une séquence ARN</h2>
+<p>Dans le champ de recherche, entrez <code>CHRNA1</code>. CHRNA1, est <a href="https://en.wikipedia.org/wiki/CHRNA1">le nom d’un gène</a> qui code une protéine réceptrice de l’acétylcholine (un neurotransmetteur).</p>
+<p>Une fois la recherche validée, vous devez obtenir quelques milliers 
+de résultats. Ce qui est beaucoup. Nous allons les filtrer pour obtenir 
+ce qui nous intéresse.</p>
+<h3 id="filtrer-les-résultats">Filtrer les résultats</h3>
+<ol type="1">
+<li><p>Parmi les organismes disponibles, sélectionner la souris (<em>Mus musculus</em>), sur la droite de la page, dans <em>Top organisms</em>, cliquez sur <em>More…</em> pour voir plus d’organismes. Constatez que cela modifie votre champ de recherche pour y ajouter cette contrainte.</p></li>
+<li><p>Nous voulons nous intéresser ici à un ARN messager (ARNm, ou <em>mRNA</em> en anglais) du gène CHRNA1. Ne conservez que les ARNm en choisissant l’entrée correspondante (à gauche de la page).</p></li>
+<li><p>Enfin, ne conservez que les résultats provenant de RefSeq (à 
+gauche de la page), qui ne contient que des données vérifiées sans 
+doublon.</p></li>
+</ol>
+<p>Il ne reste plus qu’un seul résultat, c’est celui qui nous intéresse.</p>
+<p>Nous n’arrivons pas toujours à un seul résultat avec cette démarche, 
+il peut par exemple y avoir plusieurs ARNm pour un même gène, ou alors 
+le nom du gène peut être présent sans que la molécule vienne de ce gène,
+ dans ce cas il aurait fallu raffiner la recherche en précisant que <code>CHRNA1</code> était le nom du gène, en notant <code>CHRNA1[gene name]</code>.</p>
+<h3 id="comprendre-une-entrée">Comprendre une entrée</h3>
+<p>Une entrée possède de nombreuses informations la décrivant mais 
+également détaillant comment la séquence a été identifiée. Le format 
+utilisé pour cette description est un format texte appelé <em>GenBank</em> (<a href="https://www.ncbi.nlm.nih.gov/genbank/samplerecord/">documentation</a>).</p>
+<p>Sur la première ligne, commençant par <code>LOCUS</code> on a notamment l’identifiant de cet ARN messager (commençant par <code>NM_</code>), sa taille en nucléotides, le type de molécule.</p>
+<p>Un peu plus bas, la ligne commençant par <code>ORGANISM</code> 
+confirme qu’il s’agit bien d’une séquence identifiée chez des souris. 
+Ensuite de nombreuses lignes correspondent aux références des articles 
+scientifiques ayant participé à la mise en évidence de cet ARN messager 
+et de ses caractéristiques.</p>
+<p>Descendez jusqu’à la ligne qui commence par <code>FEATURES</code>. Un certain nombre d’informations sont visibles. Identifiez :</p>
+<ol type="1">
+<li><p>Le chromosome où le gène codant cet ARNm est présent</p></li>
+<li><p>Un autre nom pour le gène CHRNA1</p></li>
+<li><p>L’identifiant numérique de ce gène</p></li>
+<li><p>Le nombre d’exons</p></li>
+</ol>
+<p>Enfin la séquence ADN de l’ARNm est présente à la fin du fichier. La 
+séquence est écrite sous forme de blocs de 10 nucléotides séparées par 
+une espace, mais ce format n’est pas le plus simple pour la manipulation
+ des séquences.</p>
+<h3 id="formats-de-données">Formats de données</h3>
+<p>Nous allons visualiser cette entrée sous un autre format. Revenez 
+tout en haut de la page. Cliquez à l’endroit où se trouve un lien <em>GenBank</em> (au dessus du nom de l’ARNm) et choisissez le format <em>Fasta (text)</em>.</p>
+<p>S’affiche alors la séquence de l’ARNm au format FASTA, un format texte simple dans lequel les lignes commençant par <code>&gt;</code>
+ décrivent la séquence écrite sur les lignes suivantes (les sauts de 
+ligne dans la séquence n’ont pas de signification particulière). Ce 
+format est très utilisé en bioinformatique pour travailler sur les 
+séquences.</p>
+<p>Revenez en arrière et sélectionnez un autre format, plus visuel : <em>Graphics</em>. Est-ce que cela confirme bien le nombre d’exons précédemment identifié ?</p>
+<p>À quelle position commence et se termine la séquence de la protéine (sur fond rouge, dont le nom commence par <code>NP_</code>) ? Pourquoi la protéine ne recouvre pas tout le gène ?</p>
+<h3 id="au-delà-du-transcrit">Au-delà du transcrit</h3>
+<p>Pour que ce gène soit exprimé, ce qui nous intéresse c’est le 
+promoteur du gène qui est en amont de celui-ci. Or pour identifier cette
+ région amont, il faut s’intéresser à la position de ce gène sur le 
+chromosome sur lequel il se trouve.</p>
+<p>Dans l’entrée GenBank nous avons identifié le chromosome sur lequel 
+ce gène se trouve. Pour autant nous ne connaissons pas sa position sur 
+le chromosome.</p>
+<p>Pour cela nous allons utiliser les liens que fait le NCBI entre ces 
+différentes banques de données. Nous sommes actuellement sur la banque 
+de données nucléotides, sur une entrée d’un ARNm, et nous allons nous 
+rendre sur l’entrée qui correspond à ce gène dans la banque <em>Gene</em>.</p>
+<p>Pour cela cliquer sur <em>Gene</em> dans <em>Related information</em> dans le bandeau de droite.</p>
+<p>Sur cette page, trouvez l’identifiant du gène, qui doit être le même 
+que celui relevé précédemment dans les informations de l’entrée GenBank.</p>
+<p>Ensuite vous trouverez le nom du chromosome, son numéro d’accession (commençant par <code>NC_</code>) et les positions sur celui-ci.</p>
+<p>Si nous voulons étudier les positions en amont du gène, quelles 
+positions devons-nous étudier ? (attention au brin sur lequel le gène se
+ trouve)</p>
+<p>Trouvez comment extraire la région se situant 1000 bases en amont du 
+début du mRNA (la séquence promotrice). La sauvegarder au format Fasta.</p>
+<h2 id="utiliser-lapi">Utiliser l’API</h2>
+<p>Nous avons fait tout cela manuellement, mais il est nécessaire 
+d’automatiser cela afin de pouvoir traiter les données automatiquement.</p>
+<p>Pour cela le NCBI offre <a href="https://www.ncbi.nlm.nih.gov/books/NBK25501/">une API</a>.</p>
+<p>Cette API peut être utilisée en accédant directement à certaines URL 
+ou, via des packages dans certains langages de programmation.</p>
+<ul>
+<li><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25500/#chapter1.Searching_a_Database">esearch</a>
+ : permet de chercher certains termes dans une base de données 
+(p.&nbsp;ex. 
+https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch/esearch.fcgi?db=MY_DB&amp;term=MY_TERM)</p></li>
+<li><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25500/#chapter1.Downloading_Full_Records">efetch</a>
+ : permet de récupérer une entrée précise dans une base de données 
+(p.&nbsp;ex. 
+https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=MY_DB&amp;id=MY_ACCESSION&amp;rettype=MY_TYPE&amp;retmode=text)</p></li>
+<li><p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25500/#chapter1.Finding_Related_Data_Through_En">elink</a>
+ : fait un lien entre une entrée dans une base de données et l’entrée 
+correspondante dans une autre base de données (p.ex. 
+https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink/elink.fcgi?dbfrom=MY_DB_FROM&amp;db=MY_DB&amp;id=MY_ACCESSION)</p></li>
+</ul>
+<p>Renouvelez ce que nous avons fait précédemment mais en utilisant cette API :</p>
+<p>Effectuez la recherche avec <code>esearch</code> (sans les filtres), sur la base de données <code>nucleotide</code> (attention à bien remplacer <code>MY_DB</code> et <code>MY_TERM</code> dans l’URL donnée en exemple).</p>
+<p>Quel est le format obtenu ? Combien de résultats y a-t-il au total (pas seulement ceux affichés) ?</p>
+<p>Afin d’appliquer les mêmes filtres que précédemment il faudra indiquer comme terme de recherche <code>Chrna1 AND biomol_mrna[PROP] AND refseq[filter] AND "Mus musculus"[Organism]</code>. Quel est l’identifiant du résultat obtenu ?</p>
+<p>Utilisez maintenant <code>efetch</code> pour récupérer l’entrée correspondante dans cette banque de données. Récupérez l’entrée au format GenBank (<code>gb</code>) puis FASTA (<code>fasta</code>) (ce qui remplace <code>MY_TYPE</code>, qui est le type de format de données).</p>
+<p>Réessayez en remplaçant l’identifiant par le numéro d’accession de la molécule (commençant par <code>NM_</code>). Obtenez-vous la même chose ?</p>
+<p>Enfin utilisez <code>elink</code> afin de passer de la banque de données <code>nucleotide</code> à la banque de données <code>gene</code>, comme précédemment sur le site web. Cela nous permettra de connaître l’identifiant du gène. <!-- https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink/elink.fcgi?dbfrom=nucleotide&db=gene&id=NM_007389.5 --></p>
+<p>Avec <code>efetch</code> récupérez les informations, au format GenBank, pour ce gène-là (banque de données <code>gene</code>). Cela nous (re)donne le numéro d’accession du chromosome et les positions du gène sur le chromosome. <!-- https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efetch.cgi?id=11435&db=gene&rettype=gb&retmode=text --></p>
+<p>Utilisez à nouveau <code>efetch</code> pour récupérer la séquence en amont de ce gène (pour préciser les positions, il faut utiliser <code>seq_start</code> et <code>seq_stop</code>, <code>seq_start</code> étant supérieur à <code>seq_stop</code> lorsqu’on est sur le brin anti-sens). <!-- https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=NC_000068.8&rettype=fasta&retmode=text&seq_start=73410782&seq_stop=73410683 --></p>
+<h2 id="sites-de-fixation-des-facteurs-de-transcription">Sites de fixation des facteurs de transcription</h2>
+<p>Comme expliqué en cours, pour que la transcription s’initie il faut 
+que des protéines, les facteurs de transcription, viennent “s’accrocher”
+ en amont du gène, dans la partie promotrice.</p>
+<p>Ces protéines reconnaissent des sites spécifiques : les sites de fixation de facteurs de transcription (en anglais <em>Transcription Factor Binding Sites</em>,
+ TFBS). Les motifs de TFBS sont modélisés par des matrices de comptage 
+ou de fréquence. À partir de données récoltées pour un site de fixation 
+(un certain nombre de séquences ADN pour lesquelles on sait qu’elles 
+correspondent à ce site) on a établi un décompte du nombre de lettres à 
+chaque position du site. Une telle modélisation est plus expressive 
+qu’une simple expression régulière qui ne permet pas d’associer une 
+probabilité d’occurrences lorsqu’il y a plusieurs possibilités pour une 
+position. Ces matrices sont nommées PFM (<em>Position Frequency Matrix</em>), PWM (<em>Position Weight Matrix</em>) ou PSSM (<em>Position Specific Scoring Matrix</em>) suivant la donnée qu’elles contiennent. Nous reviendrons sur cette modélisation la semaine prochaine.</p>
+<p>Il existe deux ressources principales regroupant des TFBS modélisés par des matrices : <a href="https://genexplain.com/transfac/">Transfac</a> et <a href="http://jaspar.genereg.net/">Jaspar</a>. Nous utiliserons Jaspar car l’accès à Transfac est payant.</p>
+<p>Suivez le ‘<em>Jaspar Interactive Tour</em>’ proposé sur la page d’accueil et répondez aux questions suivantes (nous ne traiterons pas l’étape 10 sur les TFFMs) :</p>
+<ul>
+<li>combien de matrices modélisent le site de fixation <code>GATA3</code> ?</li>
+<li>quelles sont les longueurs des sites <code>GATA</code> d’après le modèle ?</li>
+<li>d’après-vous, pourquoi ce site est nommé GATA ?</li>
+<li>sur combien de séquences la matrice <code>MA0037.2</code> a-t-elle été construite ?</li>
+<li>d’après-vous, que signifie la hauteur des lettres du schéma coloré affiché ?</li>
+</ul>
+<p>Recherchez les matrices modélisant le site <code>HNF4A</code>. Choisissez la version qui vous semble la plus appropriée : en correspondance avec l’organisme choisi.</p>
+<p>Grâce à la fonction <em>Scan</em> proposée sur le site et à la séquence promotrice récupérée précédemment, trouvez des occurrences de <strong>HNF4</strong> dans le promoteur de <code>Chrna1</code> (utilisez la séquence que vous avez téléchargée précédemment).</p>
+<p>Terminez cette partie en téléchargeant l’ensemble des matrices PFM 
+pour les vertébrés contenue dans CORE JASPAR (voir le menu Download).</p>
+
+
+</body></html>
