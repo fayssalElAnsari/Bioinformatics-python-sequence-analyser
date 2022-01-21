@@ -64,9 +64,13 @@ Nous allons visualiser cette entrée sous un autre format. Revenez tout en haut 
 
 S’affiche alors la séquence de l’ARNm au format FASTA, un format texte simple dans lequel les lignes commençant par `>` décrivent la séquence écrite sur les lignes suivantes (les sauts de ligne dans la séquence n’ont pas de signification particulière). Ce format est très utilisé en bioinformatique pour travailler sur les séquences.
 
-Revenez en arrière et sélectionnez un autre format, plus visuel : _Graphics_. Est-ce que cela confirme bien le nombre d’exons précédemment identifié ?
+Revenez en arrière et sélectionnez un autre format, plus visuel : _Graphics_.***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5?report=graph&log$=seqview)***  
+Est-ce que cela confirme bien le nombre d’exons précédemment identifié ? ***Oui***
 
-À quelle position commence et se termine la séquence de la protéine (sur fond rouge, dont le nom commence par `NP_`) ? Pourquoi la protéine ne recouvre pas tout le gène ?
+À quelle position commence et se termine la séquence de la protéine (sur fond rouge, dont le nom commence par `NP_`) ?***52..1,425***   (elle va coder la proteine)
+Pourquoi la protéine ne recouvre pas tout le gène ?
+***Le gène debuté sa séquence et la termine en 1..4,320***  
+
 
 ### Au-delà du transcrit
 
@@ -76,15 +80,15 @@ Dans l’entrée GenBank nous avons identifié le chromosome sur lequel ce gène
 
 Pour cela nous allons utiliser les liens que fait le NCBI entre ces différentes banques de données. Nous sommes actuellement sur la banque de données nucléotides, sur une entrée d’un ARNm, et nous allons nous rendre sur l’entrée qui correspond à ce gène dans la banque _Gene_.
 
-Pour cela cliquer sur _Gene_ dans _Related information_ dans le bandeau de droite.
+Pour cela cliquer sur _Gene_ dans _Related information_ dans le bandeau de droite.***https://www.ncbi.nlm.nih.gov/gene?LinkName=nuccore_gene&from_uid=425905338***
 
 Sur cette page, trouvez l’identifiant du gène, qui doit être le même que celui relevé précédemment dans les informations de l’entrée GenBank.
 
-Ensuite vous trouverez le nom du chromosome, son numéro d’accession (commençant par `NC_`) et les positions sur celui-ci.
+Ensuite vous trouverez le nom du chromosome, son numéro d’accession (commençant par `NC_`) et les positions sur celui-ci. ***NC_000068.8 (73393625..73410682, complement)***
 
-Si nous voulons étudier les positions en amont du gène, quelles positions devons-nous étudier ? (attention au brin sur lequel le gène se trouve)
+Si nous voulons étudier les positions en amont du gène, quelles positions devons-nous étudier ? (attention au brin sur lequel le gène se trouve) ***73393625..73410682***
 
-Trouvez comment extraire la région se situant 1000 bases en amont du début du mRNA (la séquence promotrice). La sauvegarder au format Fasta.
+Trouvez comment extraire la région se situant 1000 bases en amont du début du mRNA (la séquence promotrice). La sauvegarder au format Fasta.***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NC_000068.8?report=fasta&from=73393625&to=73410682&strand=true)***
 
 Utiliser l’API
 --------------
