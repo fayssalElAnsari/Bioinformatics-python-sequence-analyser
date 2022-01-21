@@ -61,12 +61,7 @@ Enfin la séquence ADN de l’ARNm est présente à la fin du fichier. La séque
 ### Formats de données
 
 Nous allons visualiser cette entrée sous un autre format. Revenez tout en haut de la page. Cliquez à l’endroit où se trouve un lien _GenBank_ (au dessus du nom de l’ARNm) et choisissez le format _Fasta (text)_.***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5?report=fasta)***
-
-S’affiche alors la séquence de l’ARNm au format FASTA, un format texte simple dans lequel les lignes commençant par `>` décrivent la séquence écrite sur les lignes suivantes (les sauts de ligne dans la séquence n’ont pas de signification particulière). Ce format est très utilisé en bioinformatique pour travailler sur les séquences.
-
-Revenez en arrière et sélectionnez un autre format, plus visuel : _Graphics_.***[Ici](https://www.ncbi.nlm.nih.gov/nuccore/NM_007389.5?report=graph&log$=seqview)***  
-Est-ce que cela confirme bien le nombre d’exons précédemment identifié ? ***Oui***
-
+https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=fasta
 À quelle position commence et se termine la séquence de la protéine (sur fond rouge, dont le nom commence par `NP_`) ?***52..1,425***   (elle va coder la proteine)
 Pourquoi la protéine ne recouvre pas tout le gène ?
 ***Le gène debuté sa séquence et la termine en 1..4,320***  
@@ -119,15 +114,33 @@ Quel est l’identifiant du résultat obtenu ? ***425905338***
 Utilisez maintenant `efetch` pour récupérer l’entrée correspondante dans cette banque de données. Récupérez l’entrée au format GenBank (`gb`) puis FASTA (`fasta`) (ce qui remplace `MY_TYPE`, qui est le type de format de données).  ***[Ici pour gb](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=gb); [Ici pour fasta](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=fasta)***
 
 Réessayez en remplaçant l’identifiant par le numéro d’accession de la molécule (commençant par `NM_`). Obtenez-vous la même chose ?  
-```
-
-```
+* En executant: [AVEC NM_007389](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=NM_007389&rettype=fasta) on obtient la meme chose.
 
 Enfin utilisez `elink` afin de passer de la banque de données `nucleotide` à la banque de données `gene`, comme précédemment sur le site web. Cela nous permettra de connaître l’identifiant du gène.
+* En executant [elink entre nucleotide et gene et NM_007389](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink/elink.fcgi?dbfrom=nucleotide&FROM&db=gene&id=NM_007389), nous obtiendrons:
+```xml
+<eLinkResult>
+    <LinkSet>
+    <DbFrom>nuccore</DbFrom>
+        <IdList>
+         <Id>425905338</Id>
+        </IdList>
+    <LinkSetDb>
+            <DbTo>gene</DbTo>
+            <LinkName>nuccore_gene</LinkName>
+            <Link>
+            <Id>11435</Id>
+        </Link>
+    </LinkSetDb>
+    </LinkSet>
+</eLinkResult>
+```
+    * donc l'id est: `425905338`
 
-Avec `efetch` récupérez les informations, au format GenBank, pour ce gène-là (banque de données `gene`). Cela nous (re)donne le numéro d’accession du chromosome et les positions du gène sur le chromosome.
+Avec `efetch` récupérez les informations, au format GenBank, pour ce gène-là (banque de données `gene`). Cela nous (re)donne le numéro d’accession du chromosome et les positions du gène sur le chromosome. *Annotation: Chromosome 2 NC_000068.8 (73393625..73410682, complement)*
+* Nous allons executer: `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=gene&id=11435&rettype=gb&retmode=text`
 
-Utilisez à nouveau `efetch` pour récupérer la séquence en amont de ce gène (pour préciser les positions, il faut utiliser `seq_start` et `seq_stop`, `seq_start` étant supérieur à `seq_stop` lorsqu’on est sur le brin anti-sens).
+Utilisez à nouveau `efetch` pour récupérer la séquence en amont de ce gène (pour préciser les positions, il faut utiliser `seq_start` et `seq_stop`, `seq_start` étant supérieur à `seq_stop` lorsqu’on est sur le brin anti-sens).[Ici](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=NC_000068.8&seq_start=73410682&seq_end=73393625&strand=2&rettype=gb&retmode=text)
 
 Sites de fixation des facteurs de transcription
 -----------------------------------------------
