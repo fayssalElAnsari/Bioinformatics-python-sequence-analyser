@@ -108,7 +108,7 @@ Effectuez la recherche avec `esearch` (sans les filtres), sur la base de donnée
 Quel est le format obtenu ?  ***XML***
 Combien de résultats y a-t-il au total (pas seulement ceux affichés) ?  ***2560***
 
-Afin d’appliquer les mêmes filtres que précédemment il faudra indiquer comme terme de recherche `Chrna1 AND biomol_mrna[PROP] AND refseq[filter] AND "Mus musculus"[Organism]`.***[Ici](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch/esearch.fcgi?db=nucleotide&term=Chrna1%20AND%20biomol_mrna[PROP]%20AND%20refseq[filter]%20AND%20%22Mus%20musculus%22[Organism]) 
+Afin d’appliquer les mêmes filtres que précédemment il faudra indiquer comme terme de recherche `Chrna1 AND biomol_mrna[PROP] AND refseq[filter] AND "Mus musculus"[Organism]`.***[Ici](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch/esearch.fcgi?db=nucleotide&term=Chrna1%20AND%20biomol_mrna[PROP]%20AND%20refseq[filter]%20AND%20%22Mus%20musculus%22[Organism])
 Quel est l’identifiant du résultat obtenu ? ***425905338***
 
 Utilisez maintenant `efetch` pour récupérer l’entrée correspondante dans cette banque de données. Récupérez l’entrée au format GenBank (`gb`) puis FASTA (`fasta`) (ce qui remplace `MY_TYPE`, qui est le type de format de données).  ***[Ici pour gb](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=gb); [Ici pour fasta](https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=nucleotide&id=425905338&rettype=fasta)***
@@ -155,23 +155,22 @@ Suivez le ‘_Jaspar Interactive Tour_’ proposé sur la page d’accueil et r�
 
 *   combien de matrices modélisent le site de fixation `GATA3` ?  
 ```
-
 ```
+
 *   quelles sont les longueurs des sites `GATA` d’après le modèle ?  
 ```
-
 ```
+
 *   d’après-vous, pourquoi ce site est nommé GATA ?  
 ```
-
 ```
+
 *   sur combien de séquences la matrice `MA0037.2` a-t-elle été construite ?  
 ```
-
 ```
+
 *   d’après-vous, que signifie la hauteur des lettres du schéma coloré affiché ?  
 ```
-
 ```  
 
 Recherchez les matrices modélisant le site `HNF4A`. Choisissez la version qui vous semble la plus appropriée : en correspondance avec l’organisme choisi.
