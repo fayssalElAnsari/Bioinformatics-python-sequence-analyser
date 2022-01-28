@@ -26,7 +26,12 @@ for feature in genebank.features:
 print("debut: " + str(genebank.features[0].location.start))
 print("fin: " + str(genebank.features[0].location.end))
 
-###################
+# 6. utilisation fn find_cds de utils.py
 print(find_cds(genebank))
 
+
+################################
+## API du NCBI avec Biopython ##
+################################
+# 1. 
 
