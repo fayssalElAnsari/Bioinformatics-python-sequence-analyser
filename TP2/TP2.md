@@ -1,15 +1,19 @@
 # TP2
-
-Utilisation de Biopython
+## mots clees
+```
+* Position weight matrix
+* 
+```
+## Utilisation de Biopython
 
 Biopython est module Python qui offre des facilités pour faire des analyses bioinformatiques. Ici nous n’allons utiliser qu’une partie de Biopython :
 
-    la lecture dans un fichier au format FASTA ou Genbank
-    la représentation des séquences
-    l’utilisation de l’API du NCBI
+*   la lecture dans un fichier au format FASTA ou Genbank
+*   la représentation des séquences
+*   l’utilisation de l’API du NCBI
 
 La documentation de Biopython ainsi que le tutorial and cookbook pourront vous aider dans ce TP et la suite du travail à effectuer.
-Lecture de fichiers
+## Lecture de fichiers
 
 Pour commencer, récupérez depuis la banque Nucleotide du NCBI l’enregistrement aux formats FASTA et Genbank correspondant à la séquence ARN étudiée la semaine dernière, dont le numéro d’accession est NM_007389.
 
@@ -20,16 +24,19 @@ Vous allez commencer par faire des essais dans un intepréteur Python afin de ma
 Le type renvoyé par SeqIO.read est un SeqRecord (documentation). Déterminez comment obtenir les résultats suivants et mettez vos réponses dans un fichier TP2.md à la racine de votre dépôt.
 
 1.  En consultant la documentation, identifiez comment récupérez la séquence depuis ces entrées.
-```
-
+```python
+genebank.seq
+fast.seq
 ```
 2.  Comment obtenir la séquence sous forme d’une string Python (de type str) ? Vérifiez que les séquences sont bien identiques entre l’entrée Genbank et l’entrée FASTA.
-```
-
+```python
+# pour changer le type de Bio.Seq.seq vers str il suffit de faire:
+str(genebank.seq)
+str(fasta.seq)
 ```
 3.  Comment obtenir la séquence complémentaire inverse (reverse complement en anglais) ?
-```
-
+```python
+sequence.reverse_complement()
 ```
 4.  Des attributs existent pour récupérer les annotations ou les features des entrées. Quels sont ces attributs ? Existent-ils aussi bien pour l’entrée FASTA que pour l’entrée Genbank ? Pourquoi ?
 ```
