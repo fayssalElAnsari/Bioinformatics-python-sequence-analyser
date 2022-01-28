@@ -135,7 +135,7 @@ Enfin utilisez `elink` afin de passer de la banque de données `nucleotide` à l
     </LinkSet>
 </eLinkResult>
 ```
-    * donc l'id est: `425905338`
+    * donc le gene id est: `11435`
 
 Avec `efetch` récupérez les informations, au format GenBank, pour ce gène-là (banque de données `gene`). Cela nous (re)donne le numéro d’accession du chromosome et les positions du gène sur le chromosome. *Annotation: Chromosome 2 NC_000068.8 (73393625..73410682, complement)*
 * Nous allons executer: `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch/efectch.fcgi?db=gene&id=11435&rettype=gb&retmode=text`
