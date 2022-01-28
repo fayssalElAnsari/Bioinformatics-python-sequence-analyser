@@ -1,4 +1,5 @@
 from Bio import SeqIO
+from src.utils import *
 
 # 1.lecture des sequence a partir des fichiers
 fasta = SeqIO.read("data/NM_007389.fasta", "fasta")
@@ -24,5 +25,8 @@ for feature in genebank.features:
 # 5. position de debut et de fin de la premiere feature
 print("debut: " + str(genebank.features[0].location.start))
 print("fin: " + str(genebank.features[0].location.end))
+
+###################
+print(find_cds(genebank))
 
 
