@@ -1,6 +1,8 @@
-from Bio import SeqIO
+from Bio import SeqIO, Entrez
 
-# faut modifier cette fonction pour accepter 
+Entrez.email = "fayssal.el.ansari@gmail.com"
+
+# TODO: faut modifier cette fonction pour accepter 
 # une seqRecord avec plusieurs sequences
 def find_cds(seqRecord):
     '''
@@ -34,3 +36,15 @@ def compare_rec_seq(record1, record2):
     else: 
         print("  Les 2 sequences NE sont PAS identiques!")
     return resultat
+
+def mrna_to_gene(pmid):
+    try:
+        handle = Entrez.elink(dbfrom="nucleotide", db="gene", id=pmid, linkname="nucleotide_gene")
+        record = Entrez.read(handle)
+        assert record != []
+        id = record[0]['LinkSetDb'][0]['Link'][0]['Id'] #  TODO: faut changer cette partie ?
+        return id
+    except ValueError as ve:
+        print(ve)
+
+def 

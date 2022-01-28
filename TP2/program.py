@@ -49,5 +49,11 @@ compare_rec_seq(gb_record, fasta_record)
 print(find_cds(gb_record)) # donc c'est le meme posittion des CDS
 
 ## elink
+print(mrna_to_gene("NM_007389"))
+
+
+## Récupération de la portion amont d’un gène
+# 1. 
+
 
 
