@@ -155,9 +155,7 @@ Suivez le ‘_Jaspar Interactive Tour_ ’ proposé sur la page d’accueil et r
 
 *   combien de matrices modélisent le site de fixation `GATA3` ? ***4***
 
-*   quelles sont les longueurs des sites `GATA` d’après le modèle ?  
-```
-```
+*   quelles sont les longueurs des sites `GATA` d’après le modèle ?  ***55***
 
 *   d’après-vous, pourquoi ce site est nommé GATA ?  
 ```
