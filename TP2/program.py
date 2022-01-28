@@ -1,5 +1,6 @@
 from Bio import SeqIO
 from src.utils import *
+from Bio import Entrez
 
 # 1.lecture des sequence a partir des fichiers
 fasta = SeqIO.read("data/NM_007389.fasta", "fasta")
@@ -33,5 +34,12 @@ print(find_cds(genebank))
 ################################
 ## API du NCBI avec Biopython ##
 ################################
-# 1. 
+# 1. Entrez
+Entrez.email = "fayssal.el.ansari@gmail.com" # why ? XD
+gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="text")
+fasta_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="fasta", retmode="text")
+
+gb_record = SeqIO.read(gb_handle, "gb")
+# fasta_record = Entrez.read(fasta_handle)
+
 
