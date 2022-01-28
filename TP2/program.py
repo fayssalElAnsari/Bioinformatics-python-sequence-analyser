@@ -6,7 +6,6 @@ from Bio import Entrez
 fasta = SeqIO.read("data/NM_007389.fasta", "fasta")
 genebank = SeqIO.read("data/NM_007389.gb", "genbank")
 
-
 # 2.comparaison entre les 2 sequence lus
 if (str(fasta.seq) == str(genebank.seq)): # True
     print("2. les 2 sequences sont identiques")
@@ -34,12 +33,21 @@ print(find_cds(genebank))
 ################################
 ## API du NCBI avec Biopython ##
 ################################
+## efetch
 # 1. Entrez
 Entrez.email = "fayssal.el.ansari@gmail.com" # why ? XD
 gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="text")
 fasta_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="fasta", retmode="text")
 
+# 2. comparaison sequences
 gb_record = SeqIO.read(gb_handle, "gb")
-# fasta_record = Entrez.read(fasta_handle)
+fasta_record = SeqIO.read(fasta_handle, "fasta")
+
+compare_rec_seq(gb_record, fasta_record)
+
+# 3. comparaison CDS
+print(find_cds(gb_record)) # donc c'est le meme posittion des CDS
+
+## elink
 
 

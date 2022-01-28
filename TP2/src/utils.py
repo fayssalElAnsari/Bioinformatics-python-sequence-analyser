@@ -22,4 +22,15 @@ if __name__ == "__main__":
     import doctest
     doctest.testmod()
 
-
+def compare_rec_seq(record1, record2):
+    ''' 
+    cette fonction prend en parametre 2 records et les comparer
+    elle affiche le resulat de la comparaison en terminal 
+    et return le resulat sous forme de boolean
+    '''
+    resultat = str(record1.seq) == str(record2.seq)
+    if (resultat): # True
+        print("  Les 2 sequences sont identiques")
+    else: 
+        print("  Les 2 sequences NE sont PAS identiques!")
+    return resultat
