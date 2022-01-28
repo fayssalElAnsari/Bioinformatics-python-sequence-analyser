@@ -37,9 +37,19 @@ record_genbank_features_len = len(record_genbank.features) # nombre de features 
 
 def affiche(features):
     for i in features:
-        print(i)
-        
+        print(i)    
 # affiche(record_fasta.features)
 # affiche(record_genbank.features)
 
-
+    # 5. Intéressez-vous à la première feature. Comment peut-on accéder à ses positions de début et de fin ?
+def premier_fin_features(features):
+    debut=0
+    if len(features)==0 :
+        print("pas de features")
+    elif len(features)==1 :
+        print("début et fin de features : \n", features[debut])
+    else:
+        fin=len(features)-1
+        print("début features : \n",features[0],"\n","fin features: \n",features[fin])
+# premier_fin_features(record_fasta.features)
+# premier_fin_features(record_genbank.features)
