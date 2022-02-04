@@ -2,7 +2,7 @@
 ## mots clees
 ```
 * Position weight matrix
-* 
+*
 ```
 ## Utilisation de Biopython
 
@@ -40,11 +40,9 @@ sequence.reverse_complement()
 ```
 4.  Des attributs existent pour récupérer les annotations ou les features des entrées. Quels sont ces attributs ? Existent-ils aussi bien pour l’entrée FASTA que pour l’entrée Genbank ? Pourquoi ?
 ```
-
 ```
 5.  Intéressez-vous à la première feature. Comment peut-on accéder à ses positions de début et de fin ?
 ```
-
 ```
 Vous allez maintenant réaliser certaines fonctions, qui s’appuient sur votre compréhension des SeqRecord qui pourront vous être utiles pour la suite.
 
@@ -108,5 +106,3 @@ La PSSM obtenue est de type PositionSpecificScoringMatrix (documentation).
     Réalisez une fonction qui, à partir d’une matrice de fréquence et de pseudo-poids, renvoie la PSSM correspondante.
 
     Comment rechercher les occurrences d’une PSSM dans une séquence ?
-
-
