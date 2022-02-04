@@ -43,6 +43,7 @@ Le projet à mener sera la programmation d'un outil pouvant servir à l'analyse 
 ---
 ##  Les exigences concernant l’environnement de développement en vue de son intégration.
 - python3, et dans sa library y ajouter biopyhton.
+- être inscrit sur moodle et avoir accès au cour de l'option bioinfo
 
 ---
 ##  Une instruction pour l’installation et l’utilisation.
