@@ -12,13 +12,14 @@ def find_cds(seqRecord):
     >>> from Bio import SeqIO
     >>> genebank = SeqIO.read("../data/NM_007389.gb", "genbank")
     >>> print(find_cds(genebank))
-    [(ExactPosition(51), ExactPosition(1425))]
+    [ExactPosition(51), ExactPosition(1425)]
 
     '''
     liste_positions = []
     for feature in seqRecord.features:
         if feature.type == "CDS":
-            liste_positions.append((feature.location.start, feature.location.end))
+            liste_positions.append(feature.location.start)
+            liste_positions.append(feature.location.end)
     return liste_positions
 
 if __name__ == "__main__":

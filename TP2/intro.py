@@ -72,6 +72,11 @@ gb_handle.close()
 # On compare
 compare_rec_seq(gb_record, fasta_record)
     # 3. En utilisant votre méthode find_cds sur le résultat au format Genbank, vérifiez que la CDS est bien identique à celle identifiée dans la première partie, avec le fichier Genbank.
+for i in record_genbank.features:
+    if i.type=="CDS":
+        print(i.location.start)
+        print(find_cds(gb_record))
+        print([i.location.start,i.location.end]==find_cds(gb_record))
 
 # elink
     # 1. Récupération de la portion amont d’un gène
