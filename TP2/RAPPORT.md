@@ -78,7 +78,8 @@ Comme la semaine dernière, nous allons utilisez `elink` pour connaître l’ide
 
 #### Récupération de la portion amont d’un gène
 
-1.  - [ ] À partir de l’identifiant du gène obtenu, utilisez la méthode `esummary` ([documentation](https://biopython.org/docs/1.75/api/Bio.Entrez.html#Bio.Entrez.esummary)) pour pouvoir déterminer le numéro d’accession du chromosome (commençant par `NC_`) et les positions chromosomiques du gène.
+1.  - [x] À partir de l’identifiant du gène obtenu, utilisez la méthode `esummary` ([documentation](https://biopython.org/docs/1.75/api/Bio.Entrez.html#Bio.Entrez.esummary)) pour pouvoir déterminer le numéro d’accession du chromosome (commençant par `NC_`) et les positions chromosomiques du gène.
+
 2.  - [ ] À partir de l’identifiant de ce chromosome, déterminez comment obtenir la séquence en amont du gène. **Attention** ne téléchargez pas tout le chromosome, mais uniquement la portion d’intérêt (comme la semaine dernière en utilisant `seq_start` et `seq_stop`).
 3.  - [ ] Dans le fichier `utils.py` réalisez une fonction `upstream_gene_seq` qui, à partir d’un identifiant de gène et d’une longueur retourne un objet Biopython `Bio.Seq` correspondant à la séquence ADN amont de ce gène de la longueur demandée (attention au brin sur lequel se trouve le gène).
 
