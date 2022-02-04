@@ -72,7 +72,7 @@ Comme vous pouvez le voir dans la documentation, le module `Entrez` possède des
 
 Comme la semaine dernière, nous allons utilisez `elink` pour connaître l’identifiant du gène correspondant à l’ARNm qu’on étudie. Cette fois nous utiliserons la méthode `elink` du module `Entrez`.
 
-1.  - [ ] Utilisez la méthode `elink` pour récupérer le gène correspondant à l’entrée `NM_007389`. Ici le résultat n’est pas exploitable par `SeqIO.read`. Regardez dans la documentation de la méthode `elink` pour savoir comment obtenir un objet exploitable à partir du résultat de la méthode `elink`.
+1.  - [x] Utilisez la méthode `elink` pour récupérer le gène correspondant à l’entrée `NM_007389`. Ici le résultat n’est pas exploitable par `SeqIO.read`. Regardez dans la documentation de la méthode `elink` pour savoir comment obtenir un objet exploitable à partir du résultat de la méthode `elink`.
 2.  - [ ] Dans le résultat obtenu, identifiez comment trouver l’identifiant du gène.
 3.  - [ ] Dans le fichier `utils.py` réalisez une méthode `mrna_to_gene` qui prenne un numéro d’accession d’un ARNm et qui renvoie l’identifiant du gène correspondant (ou qui lève une exception `ValueError` en cas de problème).
 

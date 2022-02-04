@@ -58,26 +58,37 @@ def premier_fin_features(features):
 
 # efetch
     # 1. récupérer l’entrée NM_007389 au format Genbank puis au format FASTA.
+        # On se connecte
 Entrez.email = "angeldaniel.pastorrojas.etu@univ-lille.fr"
-# On recupere
+        # On recupere
 gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="text")
 fasta_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="fasta", retmode="text")
-# On stock
+        # On stock
 gb_record = SeqIO.read(gb_handle, "gb")
 fasta_record = SeqIO.read(fasta_handle, "fasta")
-# On ferme
+        # On ferme
 fasta_handle.close()
 gb_handle.close()
     # 2. Vérifiez que les séquences des entrées obtenues sont bien identiques
-# On compare
-compare_rec_seq(gb_record, fasta_record)
+        # On compare
+# compare_rec_seq(gb_record, fasta_record)
     # 3. En utilisant votre méthode find_cds sur le résultat au format Genbank, vérifiez que la CDS est bien identique à celle identifiée dans la première partie, avec le fichier Genbank.
-for i in record_genbank.features:
-    if i.type=="CDS":
-        print(i.location.start)
-        print(find_cds(gb_record))
-        print([i.location.start,i.location.end]==find_cds(gb_record))
-
+# for i in record_genbank.features:
+#     if i.type=="CDS":
+#         print(i.location.start,i.location.end)
+#         print(find_cds(gb_record))
+#         print([i.location.start,i.location.end]==find_cds(gb_record))
 # elink
-    # 1. Récupération de la portion amont d’un gène
+    # 1. récupérer le gène correspondant à l’entrée `NM_007389`
+gb_handle_elink = Entrez.elink(dbfrom="nucleotide",db="gene", id="NM_007389")
+gb_record_elink = Entrez.read(gb_handle_elink)
+gb_handle_elink.close()
+# print(gb_record_elink)
+    # 2. Identifiez comment trouver l’identifiant du gène.
+# linked = [link["Id"] for link in gb_record_elink[0]["LinkSetDb"][0]["Link"]]
+# print(linked[0])
 
+# ou
+
+# print(gb_record_elink[0]["LinkSetDb"][0]["Link"][0]["Id"])
+    # 3. Dans le fichier `utils.py` réalisez une méthode `mrna_to_gene` qui prenne un numéro d’accession d’un ARNm et qui renvoie l’identifiant du gène correspondant (ou qui lève une exception `ValueError` en cas de problème).
