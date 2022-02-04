@@ -92,3 +92,4 @@ gb_handle_elink.close()
 
 # print(gb_record_elink[0]["LinkSetDb"][0]["Link"][0]["Id"])
     # 3. Dans le fichier `utils.py` réalisez une méthode `mrna_to_gene` qui prenne un numéro d’accession d’un ARNm et qui renvoie l’identifiant du gène correspondant (ou qui lève une exception `ValueError` en cas de problème).
+print(mrna_to_gene("12"))

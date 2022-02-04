@@ -4,7 +4,7 @@ Entrez.email = "fayssal.el.ansari@gmail.com"
 
 # TODO: faut modifier cette fonction pour accepter 
 # une seqRecord avec plusieurs sequences
-def find_cds(seqRecord):
+def find_cds(seqRecord: SeqIO):
     '''
     Cette fonction prend en parametre une sequence et retourne les CDNs
     
@@ -46,5 +46,5 @@ def mrna_to_gene(pmid):
         assert record != []
         id = record[0]['LinkSetDb'][0]['Link'][0]['Id'] #  TODO: faut changer cette partie ?
         return id
-    except ValueError as ve:
-        print(ve)
+    except Exception:
+        return ValueError()

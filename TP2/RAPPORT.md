@@ -73,8 +73,8 @@ Comme vous pouvez le voir dans la documentation, le module `Entrez` possède des
 Comme la semaine dernière, nous allons utilisez `elink` pour connaître l’identifiant du gène correspondant à l’ARNm qu’on étudie. Cette fois nous utiliserons la méthode `elink` du module `Entrez`.
 
 1.  - [x] Utilisez la méthode `elink` pour récupérer le gène correspondant à l’entrée `NM_007389`. Ici le résultat n’est pas exploitable par `SeqIO.read`. Regardez dans la documentation de la méthode `elink` pour savoir comment obtenir un objet exploitable à partir du résultat de la méthode `elink`.
-2.  - [ ] Dans le résultat obtenu, identifiez comment trouver l’identifiant du gène.
-3.  - [ ] Dans le fichier `utils.py` réalisez une méthode `mrna_to_gene` qui prenne un numéro d’accession d’un ARNm et qui renvoie l’identifiant du gène correspondant (ou qui lève une exception `ValueError` en cas de problème).
+2.  - [x] Dans le résultat obtenu, identifiez comment trouver l’identifiant du gène.
+3.  - [x] Dans le fichier `utils.py` réalisez une méthode `mrna_to_gene` qui prenne un numéro d’accession d’un ARNm et qui renvoie l’identifiant du gène correspondant (ou qui lève une exception `ValueError` en cas de problème).
 
 #### Récupération de la portion amont d’un gène
 
@@ -90,7 +90,8 @@ Calcul de score à partir de matrices de fréquences
 
 Nous allons maintenant utiliser Biopython pour trouver les endroits correspondant à des sites de fixation du facteur de transcription.
 
-Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`. Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
+- [ ] Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`.   
+- [ ] Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
 
 Le chargement de ce type fichier (matrices de fréquences) se fait avec la méthode `read` du module `motifs` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.html#Bio.motifs.read)), en lui précisant que le format est `jaspar`.
 
