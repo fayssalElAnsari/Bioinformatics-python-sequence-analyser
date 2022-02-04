@@ -64,9 +64,9 @@ Comme vous pouvez le voir dans la documentation, le module `Entrez` possède des
 
 #### efetch
 
-1.  - [ ] Utilisez la méthode `efetch` pour récupérer l’entrée `NM_007389` au format Genbank puis au format FASTA. Cette méthode retourne un _handle_ qui peut ensuite être passé à la méthode `SeqIO.read` (à la place du nom de fichier).
-2.  - [ ] Vérifiez que les séquences des entrées obtenues sont bien identiques
-3.  - [ ] En utilisant votre méthode `find_cds` sur le résultat au format Genbank, vérifiez que la CDS est bien identique à celle identifiée dans la première partie, avec le fichier Genbank.
+1.  - [x] Utilisez la méthode `efetch` pour récupérer l’entrée `NM_007389` au format Genbank puis au format FASTA. Cette méthode retourne un _handle_ qui peut ensuite être passé à la méthode `SeqIO.read` (à la place du nom de fichier).
+2.  - [x] Vérifiez que les séquences des entrées obtenues sont bien identiques
+3.  - [x] En utilisant votre méthode `find_cds` sur le résultat au format Genbank, vérifiez que la CDS est bien identique à celle identifiée dans la première partie, avec le fichier Genbank.
 
 #### elink
 
