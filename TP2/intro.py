@@ -14,6 +14,8 @@ from Bio import SeqIO
 from src.utils import *
 from Bio import Entrez
 
+# API du NCBI avec Biopython-------------------------------------------------
+
     # 1. En consultant la documentation, identifiez comment récupérez la séquence depuis ces entrées
 record_genbank = SeqIO.read("data/NM_007389.gb", "genbank")
 sequance_gb=record_genbank.seq
@@ -83,13 +85,28 @@ gb_handle.close()
 gb_handle_elink = Entrez.elink(dbfrom="nucleotide",db="gene", id="NM_007389")
 gb_record_elink = Entrez.read(gb_handle_elink)
 gb_handle_elink.close()
-# print(gb_record_elink)
     # 2. Identifiez comment trouver l’identifiant du gène.
-# linked = [link["Id"] for link in gb_record_elink[0]["LinkSetDb"][0]["Link"]]
-# print(linked[0])
-
+# print(gb_record_elink)
 # ou
-
+linked = [link["Id"] for link in gb_record_elink[0]["LinkSetDb"][0]["Link"]]
+# print(linked[0])
+# ou
 # print(gb_record_elink[0]["LinkSetDb"][0]["Link"][0]["Id"])
+
     # 3. Dans le fichier `utils.py` réalisez une méthode `mrna_to_gene` qui prenne un numéro d’accession d’un ARNm et qui renvoie l’identifiant du gène correspondant (ou qui lève une exception `ValueError` en cas de problème).
-print(mrna_to_gene("12"))
+# print(mrna_to_gene("12")) # renvoie ValueError
+# print(mrna_to_gene("NM_007389")) # renvoie Id 
+
+# Récupération de la portion amont d'un gène
+    # 1. À partir de l’identifiant du gène obtenu, utilisez la méthode esummary pour pouvoir déterminer le numéro d’accession du chromosome (commençant par NC_) et les positions chromosomiques du gène.
+gb_handle_esummary = Entrez.esummary(db="gene", id=linked[0])
+gb_record_esummary = Entrez.read(gb_handle_esummary)
+gb_handle_esummary.close()
+
+# print(type(gb_record_esummary))
+# print(gb_record_esummary.keys())
+# print(type(gb_record_esummary["DocumentSummarySet"]))
+# print(gb_record_esummary["DocumentSummarySet"].keys())
+
+
+# Calcul de score à partir de matrices de fréquences --------------------------
