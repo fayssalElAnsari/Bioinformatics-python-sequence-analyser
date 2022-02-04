@@ -9,7 +9,8 @@ def find_cds(seqRecord):
     Cette fonction prend en parametre une sequence et retourne les CDNs
     
     Example:
-    >>> genebank = SeqIO.read("data/NM_007389.gb", "genbank")
+    >>> from Bio import SeqIO
+    >>> genebank = SeqIO.read("../data/NM_007389.gb", "genbank")
     >>> print(find_cds(genebank))
     [(ExactPosition(51), ExactPosition(1425))]
 
@@ -22,7 +23,7 @@ def find_cds(seqRecord):
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod()
+    doctest.testmod(verbose=False)
 
 def compare_rec_seq(record1, record2):
     ''' 
@@ -46,5 +47,3 @@ def mrna_to_gene(pmid):
         return id
     except ValueError as ve:
         print(ve)
-
-def 

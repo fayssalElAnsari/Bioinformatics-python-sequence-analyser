@@ -11,6 +11,8 @@
 
 # TP2
 from Bio import SeqIO
+from src.utils import *
+from Bio import Entrez
 
     # 1. En consultant la documentation, identifiez comment récupérez la séquence depuis ces entrées
 record_genbank = SeqIO.read("data/NM_007389.gb", "genbank")
@@ -53,3 +55,24 @@ def premier_fin_features(features):
         print("début features : \n",features[0],"\n","fin features: \n",features[fin])
 # premier_fin_features(record_fasta.features)
 # premier_fin_features(record_genbank.features)
+
+# efetch
+    # 1. récupérer l’entrée NM_007389 au format Genbank puis au format FASTA.
+Entrez.email = "angeldaniel.pastorrojas.etu@univ-lille.fr"
+# On recupere
+gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="text")
+fasta_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="fasta", retmode="text")
+# On stock
+gb_record = SeqIO.read(gb_handle, "gb")
+fasta_record = SeqIO.read(fasta_handle, "fasta")
+# On ferme
+fasta_handle.close()
+gb_handle.close()
+    # 2. Vérifiez que les séquences des entrées obtenues sont bien identiques
+# On compare
+compare_rec_seq(gb_record, fasta_record)
+    # 3. En utilisant votre méthode find_cds sur le résultat au format Genbank, vérifiez que la CDS est bien identique à celle identifiée dans la première partie, avec le fichier Genbank.
+
+# elink
+    # 1. Récupération de la portion amont d’un gène
+
