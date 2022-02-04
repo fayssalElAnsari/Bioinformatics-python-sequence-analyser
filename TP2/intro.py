@@ -98,6 +98,8 @@ linked = [link["Id"] for link in gb_record_elink[0]["LinkSetDb"][0]["Link"]]
 # print(mrna_to_gene("12")) # renvoie ValueError
 # print(mrna_to_gene("NM_007389")) # renvoie Id 
 
+
+# Essumary
 # Récupération de la portion amont d'un gène
     # 1. À partir de l’identifiant du gène obtenu, utilisez la méthode esummary pour pouvoir déterminer le numéro d’accession du chromosome (commençant par NC_) et les positions chromosomiques du gène.
 gb_handle_esummary = Entrez.esummary(db="gene", id=mrna_to_gene("NM_007389"))
