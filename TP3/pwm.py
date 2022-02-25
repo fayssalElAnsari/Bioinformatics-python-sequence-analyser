@@ -9,6 +9,12 @@ def jaspar2pwm():
         count = 0
         for m in motifs.parse(handle, "jaspar"):
             print(m)
+            print("normalizing...")
+            print("PWM:")
+            print(m.counts.normalize(50)) # 50 by trial to get a 0.0x difference
+            print("PSSM")
+            print(m.counts.normalize(0.01).log_odds())
+
             # motifs.calculate(m)
             count = count + 1
 
