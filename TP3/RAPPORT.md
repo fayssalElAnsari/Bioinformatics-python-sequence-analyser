@@ -76,10 +76,12 @@ Script pour le rendu intermédiaire
 
 Il est temps maintenant de consolider ce qui a été fait la semaine dernière et cette semaine.
 
-1.  Réalisez le script `scan_pwm.py` pour le rendu intermédiaire (le pseudo-poids sera figé à la valeur 0.1). Bien sûr ce script importera les modules `pwm.py` et `utils.py`.
+- [x] 1.  Réalisez le script `scan_pwm.py` pour le rendu intermédiaire (le pseudo-poids sera figé à la valeur 0.1). Bien sûr ce script importera les modules `pwm.py` et `utils.py`.
 
-2.  Pour tester votre script vous pourrez faire des recherches les matrices `MA0083, MA0114, MA0056` sur `NM_007389` avec un seuil de score positionné à -2.0.
+- [x] 2.  Pour tester votre script vous pourrez faire des recherches les matrices `MA0083, MA0114, MA0056` sur `NM_007389` avec un seuil de score positionné à -2.0.
+  ```shell
+  ~/TP3$ python scan_pwm.py MA0083.jaspar NM_007389 6 -2
+  ```
+- [x] 3.  Que signifie une position d’occurrence négative ? ***Cela signifie que la séquence est plus loin de la distance moyenne moyenne***
 
-3.  Que signifie une position d’occurrence négative ?
-
-4.  En lien avec la question précédente, posez-vous la question de l’endroit où se trouve, vis-à-vis du début du gène, la position d’occurrence d’une matrice fournie par votre script.
+- [ ] 4.  En lien avec la question précédente, posez-vous la question de l’endroit où se trouve, vis-à-vis du début du gène, la position d’occurrence d’une matrice fournie par votre script.
