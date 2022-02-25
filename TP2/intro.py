@@ -117,7 +117,7 @@ gb_handle_esummary.close()
 print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
 numero_accesion_chromosome=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
     # les positions chromosomiques du gène début
-# print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"])
+# print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"])
 postion_chromosomique_gene_debut=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"]
 # print(postion_chromosomique_gene_debut)
     # les positions chromosomiques du gène fin
