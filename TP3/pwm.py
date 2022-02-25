@@ -6,6 +6,14 @@ import json
 Entrez.email = "fayssal.el.ansari@gmail.com"
 
 def jaspar2pwm():
+    ''' 
+    cette fonction est la reponse a la premiere partie du TP3
+    on genere une matrice de frequence on la normalise pour
+    obtenir la PWM, a partir de cette matrice on genere la PSSM
+    et finalement on cherche la presence d'une Seq (on a choisis
+    une sequence qu'on sait qu'elle existe dans la matric) au dessus
+    d'un seuil calculer a partir du min et max de la PSSM
+    '''
     with open("data/MA0037.2.jaspar") as handle:
         count = 0
         for m in motifs.parse(handle, "jaspar"):
@@ -33,6 +41,9 @@ def jaspar2pwm():
     # print("Le nombre des matrices lus: " + str(count))
 
 def pwm2pssm(matrix, pseudo_weight, v = False):
+    '''
+    cette fonction converti une PWM en une PSSM
+    '''
     if v:
         print(matrix)
         print("normalizing...")
@@ -46,6 +57,9 @@ def pwm2pssm(matrix, pseudo_weight, v = False):
     return pssm
 
 def scan_sequence(pssm, seqstring, seuil):
+    '''
+    scan l'existance d'une sequence au dessus d'un seuil dans mune PSSM
+    '''
     l = list()
     seq = Seq(seqstring)
     print("recherche de la Seq('AGATAAGA') avec un seuil de ", seuil , " : ")
@@ -55,7 +69,6 @@ def scan_sequence(pssm, seqstring, seuil):
 
 
 def main():
-    # jaspar2pwm()
     with open("data/MA0037.2.jaspar") as handle:
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)

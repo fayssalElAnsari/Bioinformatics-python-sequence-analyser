@@ -25,12 +25,6 @@ def find_cds(seqRecord):
     #     liste_positions.append(featureLoc)
     # return liste_positions
 
-
-
-if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
-
 def compare_rec_seq(record1, record2):
     ''' 
     cette fonction prend en parametre 2 records et les comparer
@@ -61,3 +55,8 @@ def upstream_gene_seq(pmid):
     print(json.dumps(record, indent=2, separators=(", ", " : ")))
     # print(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
     return record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
+
