@@ -32,20 +32,25 @@ def jaspar2pwm():
 
     # print("Le nombre des matrices lus: " + str(count))
 
-def pwm2pssm(matrix, pseudo_weight):
-    print(matrix)
-    print("normalizing...")
-    print("PWM with pseudo wieght of 50:")
-    pwm = m.counts.normalize(50)
-    print(pwm) # 50 by trial to get a 0.0x difference
-    pwm2 = m.counts.normalize(0.01)
-    print("PSSM")
+def pwm2pssm(matrix, pseudo_weight, v = False):
+    if v:
+        print(matrix)
+        print("normalizing...")
+        print("PWM with pseudo wieght of: ", pseudo_weight)
+    pwm2 = matrix.counts.normalize(pseudo_weight)
+    if v:
+        print("PSSM")
     pssm = pwm2.log_odds() 
-    print(pssm)
+    if v:
+        print(pssm)
     return pssm
 
 def main():
-    jaspar2pwm()
+    # jaspar2pwm()
+    with open("data/MA0037.2.jaspar") as handle:
+        for matrix in motifs.parse(handle, "jaspar"):
+            pwm2pssm(matrix, 0.01, True)
+
 
 if __name__ == "__main__":
     main()
