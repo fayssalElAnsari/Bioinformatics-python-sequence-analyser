@@ -47,7 +47,7 @@ Nous allons travailler à partir du fichier que vous avez [téléchargé la sema
 
 Le chargement de ce type fichier (matrices de fréquences) se fait avec la méthode `read` du module `motifs` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.html#Bio.motifs.read)), en lui précisant que le format est `jaspar`.
 
-- [x] 1.  Combien de matrices ont été lues ? ***=> On a lu 4 matrices***
+- [x] 1.  Combien de matrices ont été lues ? ***=> On a lu 1 matrices***
 
 Pour chaque entrée, la matrice est accessible via l’attribut `counts`, de type `FrequencyPositionMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.FrequencyPositionMatrix)).
 
