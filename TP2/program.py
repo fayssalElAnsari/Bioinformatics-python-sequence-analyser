@@ -1,5 +1,5 @@
 from Bio import SeqIO
-from src.utils import *
+from src.utils2 import *
 from Bio import Entrez
 
 # 1.lecture des sequence a partir des fichiers
@@ -20,7 +20,7 @@ print("    la longeur du format genebank est: " + str(len(genebank.features)))
 # le format fasta n'a pas de features (la longeur de sa liste features est 0)
 print("4.b les features du format genebank sont: ")
 for feature in genebank.features:
-    print("  " +feature.type)
+    print("  " + feature.type)
 
 # 5. position de debut et de fin de la premiere feature
 print("debut: " + str(genebank.features[0].location.start))
@@ -35,7 +35,7 @@ print(find_cds(genebank))
 ################################
 ## efetch
 # 1. Entrez
-Entrez.email = "fayssal.el.ansari@gmail.com" # why ? XD
+Entrez.email = "fayssal.el.ansari@gmail.com"
 gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="text")
 fasta_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="fasta", retmode="text")
 
@@ -46,14 +46,21 @@ fasta_record = SeqIO.read(fasta_handle, "fasta")
 compare_rec_seq(gb_record, fasta_record)
 
 # 3. comparaison CDS
-print(find_cds(gb_record)) # donc c'est le meme posittion des CDS
+print(find_cds(gb_record)) # donc c'est la meme position des CDS
 
 ## elink
-print(mrna_to_gene("NM_007389"))
-
+id_gene_obtenue = mrna_to_gene("NM_007389")
 
 ## Récupération de la portion amont d’un gène
-# 1. 
+'''
+À partir de l’identifiant du gène obtenu, utilisez la méthode esummary (documentation) pour pouvoir déterminer 
+le numéro d’accession du chromosome (commençant par NC_) et les positions chromosomiques du gène.
+[ ] determineer num d'accession du chromosome
+[ ] positions chromosomiques du gene
+'''
+num_accession = upstream_gene_seq(id_gene_obtenue)
+
+
 
 
 

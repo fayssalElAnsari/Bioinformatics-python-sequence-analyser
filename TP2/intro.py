@@ -104,6 +104,8 @@ linked = [link["Id"] for link in gb_record_elink[0]["LinkSetDb"][0]["Link"]]
     # 1. À partir de l’identifiant du gène obtenu, utilisez la méthode esummary pour pouvoir déterminer le numéro d’accession du chromosome (commençant par NC_) et les positions chromosomiques du gène.
 gb_handle_esummary = Entrez.esummary(dbfrom="nucleotide", db="gene", id=mrna_to_gene("NM_007389"))
 gb_record_esummary = Entrez.read(gb_handle_esummary)
+# print(gb_record_esummary)
+# gb_record_esummary.reverse_complement()
 gb_handle_esummary.close()
 
 # print(type(gb_record_esummary))
@@ -112,13 +114,16 @@ gb_handle_esummary.close()
 # print(gb_record_esummary["DocumentSummarySet"].keys())
 
     # numéro d’accession du chromosome :
-# print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
+print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
 numero_accesion_chromosome=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
     # les positions chromosomiques du gène début
 # print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"])
-postion_chromosomique_gene_debut=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"]
+postion_chromosomique_gene_debut=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"]
+# print(postion_chromosomique_gene_debut)
     # les positions chromosomiques du gène fin
 # print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"])
 postion_chromosomique_gene_fin=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"]
+# print(postion_chromosomique_gene_fin)
 
 # Calcul de score à partir de matrices de fréquences --------------------------
+
