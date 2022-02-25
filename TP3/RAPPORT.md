@@ -66,9 +66,9 @@ Mise en place de fonctions utiles pour manipuler les PWM
 
 Toutes les fonctions seront positionnées dans un fichier `pwm.py`.
 
-1.  Réalisez une fonction `pwm2pssm` qui, à partir d’une matrice de fréquence JASPAR (un objet `FrequencyPositionMatrix`) et d’un pseudo-poids passés en paramètre, retourne la PSSM correspondante (un objet `PositionSpecificScoringMatrix`).
+- [x] 1.  Réalisez une fonction `pwm2pssm` qui, à partir d’une matrice de fréquence JASPAR (un objet `FrequencyPositionMatrix`) et d’un pseudo-poids passés en paramètre, retourne la PSSM correspondante (un objet `PositionSpecificScoringMatrix`).
 
-2.  Réalisez une fonction `scan_sequence` qui, à partir d’une PSSM (un objet `PositionSpecificScoringMatrix`), d’une séquence (un objet Biopython `Bio.Seq`), et d’un seuil de score passés en paramètre, retourne une liste de couples position, score d’occurrence.
+- [x] 2.  Réalisez une fonction `scan_sequence` qui, à partir d’une PSSM (un objet `PositionSpecificScoringMatrix`), d’une séquence (un objet Biopython `Bio.Seq`), et d’un seuil de score passés en paramètre, retourne une liste de couples position, score d’occurrence.
 
 
 Script pour le rendu intermédiaire
