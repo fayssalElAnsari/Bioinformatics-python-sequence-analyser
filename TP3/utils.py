@@ -36,7 +36,11 @@ def compare_rec_seq(record1, record2):
     cette fonction prend en parametre 2 records et les comparer
     elle affiche le resulat de la comparaison en terminal 
     et return le resulat sous forme de boolean
-    '''pwm2pssm
+    '''
+    resultat = str(record1.seq) == str(record2.seq)
+    if (resultat): # True
+        print("  Les 2 sequences sont identiques")
+    else: 
         print("  Les 2 sequences NE sont PAS identiques!")
     return resultat
 
@@ -54,4 +58,6 @@ def upstream_gene_seq(pmid):
     handle = Entrez.esummary(db="gene", id=pmid)
     record = Entrez.read(handle)
     handle.close()
-    print(json.dumps(record, indent=2, separatopwm2pssm
+    print(json.dumps(record, indent=2, separators=(", ", " : ")))
+    # print(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
+    return record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
