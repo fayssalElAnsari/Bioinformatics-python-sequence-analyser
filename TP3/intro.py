@@ -6,6 +6,6 @@ with open("data/MA0037.2.jaspar") as handle:
         m = motifs.read(handle, "jaspar")
         print(m.consensus)
         print(m)
-
     # 2. De quelle manière allez-vous pouvoir obtenir une matrice poids-position (position-weight matrix, PWM) ?
+        print(m.counts)
             #  Quelle valeur mettez-vous pour les pseudo-poids (pseudocounts) ?
