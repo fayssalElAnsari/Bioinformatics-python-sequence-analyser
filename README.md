@@ -37,7 +37,7 @@ Le projet à mener sera la programmation d'un outil pouvant servir à l'analyse 
   - [x] Créer un README.md
   - [x] Finir TP1
 + séance du 28 janvier 2022 (J.-S. Varré):
-  - [ ] Finir TP2
+  - [x] Finir TP2
   - [x] Decouvrir biopython
 
 ---
