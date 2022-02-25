@@ -1,5 +1,5 @@
 from Bio import SeqIO
-from src.utils2 import *
+from src.utils import *
 from Bio import Entrez
 
 # 1.lecture des sequence a partir des fichiers
@@ -53,14 +53,9 @@ id_gene_obtenue = mrna_to_gene("NM_007389")
 
 ## Récupération de la portion amont d’un gène
 '''
-À partir de l’identifiant du gène obtenu, utilisez la méthode esummary (documentation) pour pouvoir déterminer 
+À partir de l’identifiant du gène obtenu, utilisez la méthode esummary (documentation) pour pouvoir déterminer
 le numéro d’accession du chromosome (commençant par NC_) et les positions chromosomiques du gène.
 [ ] determineer num d'accession du chromosome
 [ ] positions chromosomiques du gene
 '''
 num_accession = upstream_gene_seq(id_gene_obtenue)
-
-
-
-
-

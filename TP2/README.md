@@ -3,6 +3,11 @@ PASTOR ROJAS angel daniel
 EL ANSARI Fayssal
 
 ##  Description générale du système ou du projet.
+Le RAPPORT.md est en rélation avec les fichiers :
+  - intro.py (ici sera une grande partie de la compréhension du sujet),
+  - utlis.py
+
+
 ---
 ##  Modifications prévues et l’objectif du développement ou signalez clairement que le développement du projet est terminé.
 ---
