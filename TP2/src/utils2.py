@@ -11,7 +11,7 @@ def find_cds(seqRecord):
     Cette fonction prend en parametre une sequence et retourne les CDNs
     
     Example:
-    >>> genebank = SeqIO.read("data/NM_007389.gb", "genbank")
+    >>> genebank = SeqIO.read("../data/NM_007389.gb", "genbank")
     >>> print(find_cds(genebank))
     [(ExactPosition(51), ExactPosition(1425))]
     '''
