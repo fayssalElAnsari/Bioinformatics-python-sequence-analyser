@@ -14,6 +14,8 @@ from Bio import SeqIO
 from src.utils import *
 from Bio import Entrez
 
+import webbrowser
+
 # API du NCBI avec Biopython-------------------------------------------------
 
     # 1. En consultant la documentation, identifiez comment récupérez la séquence depuis ces entrées
@@ -114,16 +116,25 @@ gb_handle_esummary.close()
 # print(gb_record_esummary["DocumentSummarySet"].keys())
 
     # numéro d’accession du chromosome :
-print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
+#print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
 numero_accesion_chromosome=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
     # les positions chromosomiques du gène début
 # print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"])
 postion_chromosomique_gene_debut=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"]
-# print(postion_chromosomique_gene_debut)
+# print("position du gene début :",postion_chromosomique_gene_debut)
     # les positions chromosomiques du gène fin
 # print(gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"])
 postion_chromosomique_gene_fin=gb_record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"]
-# print(postion_chromosomique_gene_fin)
+# print("position du gèen fin :",postion_chromosomique_gene_fin)
+    # 2. À partir de l’identifiant de ce chromosome, déterminez comment obtenir la séquence en amont du gène.
+# On sait que les position que nous sont données sont celles vue par les biologiste on n'oublira pas d'ajouter +1 au séquence afficher mais non travailler
+# Cependant comme on va utiliser l'api NCBI on ajoutera pour l'afficher 
+postion_chromosomique_gene_debut=int(postion_chromosomique_gene_debut)+1
+postion_chromosomique_gene_fin=int(postion_chromosomique_gene_fin)+1
+# la position début en amont commence à partir  de la postion_chromosomique_gene_debut et les 1000 qui le suivent
+sequence_amont=(postion_chromosomique_gene_debut+1,postion_chromosomique_gene_debut+1000)
+# Comme vue dans le TP1 on récupère la séquence voulu avec l'API du NCBI
+# webbrowser.open("https://www.ncbi.nlm.nih.gov/nuccore/+str(numero_accesion_chromosome)+?report=fasta&from="+str(sequence_amont[1])+"&to="+str(sequence_amont[0])+"&strand=true")
 
 # Calcul de score à partir de matrices de fréquences --------------------------
 
