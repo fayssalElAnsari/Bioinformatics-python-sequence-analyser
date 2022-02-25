@@ -1,11 +1,11 @@
 from Bio import motifs
-# 1. Combien de matrices ont été lues ?
-def nombre_matrice_lu(motifs_read):
-    print(len(set(str(m.consensus))))
 
+# Calcul de score à partir de matrices de fréquences
+    # 1. Combien de matrices ont été lues ?
 with open("data/MA0037.2.jaspar") as handle:
         m = motifs.read(handle, "jaspar")
-#         print(m.consensus)
-        nombre_matrice_lu(m)
-        
-        
+        print(m.consensus)
+        print(m)
+
+    # 2. De quelle manière allez-vous pouvoir obtenir une matrice poids-position (position-weight matrix, PWM) ?
+            #  Quelle valeur mettez-vous pour les pseudo-poids (pseudocounts) ?
