@@ -45,11 +45,22 @@ def pwm2pssm(matrix, pseudo_weight, v = False):
         print(pssm)
     return pssm
 
+def scan_sequence(pssm, seqstring, seuil):
+    l = list()
+    seq = Seq(seqstring)
+    print("recherche de la Seq('AGATAAGA') avec un seuil de ", seuil , " : ")
+    for position, score in pssm.search(seq, seuil):
+        l.append((position, score))
+    return l
+
+
 def main():
     # jaspar2pwm()
     with open("data/MA0037.2.jaspar") as handle:
         for matrix in motifs.parse(handle, "jaspar"):
-            pwm2pssm(matrix, 0.01, True)
+            pssm = pwm2pssm(matrix, 0.01, False)
+            scan_res = scan_sequence(pssm, "AGATAAGA", 1)
+            print(scan_res)
 
 
 if __name__ == "__main__":
