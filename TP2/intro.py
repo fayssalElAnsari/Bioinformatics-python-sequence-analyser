@@ -26,9 +26,11 @@ record_fasta = SeqIO.read("data/NM_007389.fasta", "fasta")
 sequance_fasta=record_fasta.seq
 # print(sequance_fasta)
 
-    # 2. Comment obtenir la séquence sous forme d’une string Python (de type str) ? Vérifiez que les séquences sont bien identiques entre l’entrée Genbank et l’entrée FASTA.
+    # 2. Comment obtenir la séquence sous forme d’une string Python (de type str) ? 
 sequance_fasta_str = str(sequance_fasta)
-sequance_gb_str = str(sequance_gb)
+sequance_gb_str = str(sequance_gb) 
+    #     Vérifiez que les séquences sont bien identiques entre l’entrée Genbank et l’entrée FASTA.
+# print(sequance_fasta_str==sequance_gb_str)
 # print(sequance_fasta_str,"\n",sequance_gb_str)
 
     # 3. Comment obtenir la séquence complémentaire inverse (reverse complement en anglais) ?
