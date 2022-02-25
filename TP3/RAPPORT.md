@@ -59,7 +59,7 @@ Le résultat que vous obtenez doit dont être une PWM, de type `PositionWeightMa
 
 La PSSM obtenue est de type `PositionSpecificScoringMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionSpecificScoringMatrix)).
 
-- [ ] 4.  Comment rechercher les occurrences d’une PSSM dans une séquence ?
+- [x] 4.  Comment rechercher les occurrences d’une PSSM dans une séquence ?
 
 Mise en place de fonctions utiles pour manipuler les PWM
 --------------------------------------------------------
