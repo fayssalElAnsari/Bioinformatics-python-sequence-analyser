@@ -49,7 +49,8 @@ def mrna_to_gene(pmid):
         return ValueError(str(pmid) + " : wrong id value passed")
 
 def upstream_gene_seq(pmid):
-    handle = Entrez.esummary(db="gene", id=pmid)
+    """ renvoie le numéro d'acension"""
+    handle = Entrez.esummary(db="gene", id=mrna_to_gene(pmid))
     record = Entrez.read(handle)
     handle.close()
     print(json.dumps(record, indent=2, separators=(", ", " : ")))
