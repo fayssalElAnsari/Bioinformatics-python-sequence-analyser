@@ -69,7 +69,7 @@ def scan_sequence(pssm, seqstring, seuil):
 
 
 def main():
-    with open("data/MA0037.2.jaspar") as handle:
+    with open("data/MA0037.jaspar") as handle:
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
             scan_res = scan_sequence(pssm, "AGATAAGA", 1)
