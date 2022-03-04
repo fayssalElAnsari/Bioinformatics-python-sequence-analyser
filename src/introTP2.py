@@ -11,7 +11,7 @@
 
 # TP2
 from Bio import SeqIO
-from src.utils import *
+from utils import *
 from Bio import Entrez
 
 import webbrowser
@@ -19,10 +19,10 @@ import webbrowser
 # API du NCBI avec Biopython-------------------------------------------------
 
     # 1. En consultant la documentation, identifiez comment récupérez la séquence depuis ces entrées
-record_genbank = SeqIO.read("data/NM_007389.gb", "genbank")
+record_genbank = SeqIO.read("../data/NM_007389.gb", "genbank")
 sequance_gb=record_genbank.seq
 # print(sequance_gb)
-record_fasta = SeqIO.read("data/NM_007389.fasta", "fasta")
+record_fasta = SeqIO.read("../data/NM_007389.fasta", "fasta")
 sequance_fasta=record_fasta.seq
 # print(sequance_fasta)
 
@@ -67,7 +67,7 @@ def premier_fin_features(features):
         # On se connecte
 Entrez.email = "angeldaniel.pastorrojas.etu@univ-lille.fr"
         # On recupere
-gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="text")
+gb_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="gb", retmode="gb")
 fasta_handle = Entrez.efetch(db="nucleotide", id="NM_007389", rettype="fasta", retmode="text")
         # On stock
 gb_record = SeqIO.read(gb_handle, "gb")
@@ -83,6 +83,11 @@ gb_handle.close()
 #     if i.type=="CDS":
 #         print(i.location.start,i.location.end)
 #         print(find_cds(gb_record))
+
+def efetch(mail,id,rettype):
+    pass
+
+
 #         print([i.location.start,i.location.end]==find_cds(gb_record))
 # elink
     # 1. récupérer le gène correspondant à l’entrée `NM_007389`
