@@ -14,7 +14,7 @@ def jaspar2pwm():
     une sequence qu'on sait qu'elle existe dans la matric) au dessus
     d'un seuil calculer a partir du min et max de la PSSM
     '''
-    with open("data/MA0037.2.jaspar") as handle:
+    with open("../data/MA0037.jaspar") as handle:
         count = 0
         for m in motifs.parse(handle, "jaspar"):
             print(m)
@@ -62,19 +62,32 @@ def scan_sequence(pssm, seqstring, seuil):
     '''
     l = list()
     seq = Seq(seqstring)
-    print("recherche de la Seq('AGATAAGA') avec un seuil de ", seuil , " : ")
-    for position, score in pssm.search(seq, seuil):
-        l.append((position, score))
+    print("recherche de la Seq(" + seqstring + ") avec un seuil de ", seuil , " : ")
+    try:
+        for position, score in pssm.search(seq, seuil):
+            l.append((position, score))
+    except:
+        pass
     return l
 
+def scan_sequences(pssm, seq_list, seuil):
+    '''
+    cette fonction fait la meme chose que scan sequence mais cette fois pour 
+    une liste de sequence au lieu d'une seul sequence
+    '''
+    liste_pos_score = []
+    for seq in seq_list:
+        liste_pos_score.append(scan_sequence(pssm, seq, seuil))
+    return liste_pos_score
 
 def main():
-    with open("data/MA0037.jaspar") as handle:
+    list_seq = SeqIO.read("../data/NM_007389.fasta", "fasta")
+    with open("../data/MA0037.jaspar") as handle:
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
-            scan_res = scan_sequence(pssm, "AGATAAGA", 1)
-            print(scan_res)
-
+            # scan_res = scan_sequence(pssm, "AGATAAGA", 1)
+            # print(scan_res)
+            print(scan_sequences(pssm, list_seq, -20))
 
 if __name__ == "__main__":
     main()

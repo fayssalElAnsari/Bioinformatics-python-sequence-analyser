@@ -4,7 +4,7 @@ import json
 
 Entrez.email = "fayssal.el.ansari@gmail.com"
 
-# TODO: faut modifier cette fonction pour accepter 
+# TODO: faut modifier cette fonction pour accepter
 # une seqRecord avec plusieurs sequences
 def find_cds(seqRecord):
     '''
