@@ -9,7 +9,7 @@ Entrez.email = "fayssal.el.ansari@gmail.com"
 def find_cds(seqRecord):
     '''
     Cette fonction prend en parametre une sequence et retourne les CDNs
-    
+
     Example:
     >>> genebank = SeqIO.read("../data/NM_007389.gb", "genbank")
     >>> print(find_cds(genebank))
@@ -26,15 +26,15 @@ def find_cds(seqRecord):
     # return liste_positions
 
 def compare_rec_seq(record1, record2):
-    ''' 
+    '''
     cette fonction prend en parametre 2 records et les comparer
-    elle affiche le resulat de la comparaison en terminal 
+    elle affiche le resulat de la comparaison en terminal
     et return le resulat sous forme de boolean
     '''
     resultat = str(record1.seq) == str(record2.seq)
     if (resultat): # True
         print("  Les 2 sequences sont identiques")
-    else: 
+    else:
         print("  Les 2 sequences NE sont PAS identiques!")
     return resultat
 
@@ -47,6 +47,7 @@ def mrna_to_gene(pmid):
         return id
     except AssertionError as ve:
         return ValueError(str(pmid) + " : wrong id value passed")
+        
 
 def upstream_gene_seq(pmid):
     """ renvoie le numéro d'acension"""
@@ -60,4 +61,3 @@ def upstream_gene_seq(pmid):
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-
