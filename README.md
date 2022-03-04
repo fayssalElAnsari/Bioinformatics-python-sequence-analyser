@@ -1,62 +1,87 @@
-# BioInfo-TPs-EL_ANSARI-PASTOR_ROJAS
-PASTOR ROJAS angel daniel  
-EL ANSARI Fayssal
+TP3 - Recherche d’occurrences de matrices PFM
+=============================================
 
-##  Description générale du système ou du projet.
-Le projet à mener sera la programmation d'un outil pouvant servir à l'analyse de données biologiques. Pour être plus concret, les cellules interagissent avec leur environnement et entre elles. Des signaux extérieurs induisent la modification de la synthèse de protéines (souvent des enzymes), ce qui modifie le comportement des cellules. L'outil développé aidera à déterminer quelles protéines seront influencées par un signal donné. Chaque TP aura sont propre README.md.
+Département informatique – Université de Lille
 
-+ séance du 14 janvier 2022:
-  - Le schéma d'un gène [bactérien](https://moodle.univ-lille.fr/pluginfile.php/1327417/course/section/193715/schema_gene_bacterien.pdf) et d'un gène [eucaryote](https://moodle.univ-lille.fr/pluginfile.php/1327417/course/section/193715/schemas_gene_eucaryote.pdf)
-  - Schémas de cellules sur le site [cell image library](http://www.cellimagelibrary.org/pages/cell_illustration) et d'un [virus](http://www.cellimagelibrary.org/images/40579)
-  - Animations sur le dogme central de la biologie, dont la [réplication de l'ADN](https://youtu.be/TNKWgcFPHqw) et [de l'adn à la protéine](https://youtu.be/gG7uCskUOrA) par nature video ; ou encore la transcription et la traduction par [learn.genetics](https://learngendev.azurewebsites.net/content/evolution/txtl/)
-  - Schéma d'un [facteur de transcription](https://upload.wikimedia.org/wikipedia/commons/d/da/Transcription_Factors-fr.svg)
-  - Animations sur les réseaux cellulaires avec [the lac operon](https://youtu.be/oBwtxdI1zvk)
-  - Introduction à la [bio-informatique](https://moodle.univ-lille.fr/pluginfile.php/1327417/course/section/193715/intro_bioinfo.pdf?time=1611066956962)
-  - [diaporama d'Introduction à la bio-informatique](https://moodle.univ-lille.fr/mod/resource/view.php?id=1048173)
+*   [Rendu intermédiaire](#rendu-intermédiaire)
+*   [Calcul de score à partir de matrices de fréquences (repris du TP2)](#calcul-de-score-à-partir-de-matrices-de-fréquences-repris-du-tp2)
+*   [Mise en place de fonctions utiles pour manipuler les PWM](#mise-en-place-de-fonctions-utiles-pour-manipuler-les-pwm)
+*   [Script pour le rendu intermédiaire](#script-pour-le-rendu-intermédiaire)
+*   [Recherche pour un ensemble de séquences](#recherche-pour-un-ensemble-de-séquences)
+*   [Le module de gestion des arguments `argparse` de Python](#le-module-de-gestion-des-arguments-argparse-de-python)
 
-+ séance du 21 janvier 2022 (M. Salson):
-  - Enoncé du [TP1](http://www.fil.univ-lille1.fr/%7Esalson/portail/bioinfo-s6/TP1.html)
-  - Installer biopyhton
-  - Manipuler des données :
-    * directement via une interface en ligne sur des bases de données publiques
-    * en utilisant l'API fournie par ces bases de données
+L’objectif de ce TP est :
 
-+ séance du 28 janvier 2022 (J.-S. Varré):
-  - Enoncé du [TP2](http://www.fil.univ-lille1.fr/%7Esalson/portail/bioinfo-s6/TP2.html)
-  - découverte de biopython
-  - mise en oeuvre par le téléchargement de séquences promotrices d'un gène (précisément d'un ARNm)
-  - [Cours sur les matrices poids-positiion](https://moodle.univ-lille.fr/mod/resource/view.php?id=681241)
----
-##  Modifications prévues et l’objectif du développement ou signalez clairement que le développement du projet est terminé.
-+ séance du 14 janvier 2022:
-  - [x] Voir le diaporama et interagir avec le Biologiste
-+ séance du 21 janvier 2022 (M. Salson):
-  - [x] Installer biopython
-  - [x] Saisie des binômes su moodle
-  - [x] Créer un projet Gitlab du FIL, ajouter votre binôme et les 2 encadrants de l'UE en tant que *Maintainer*
-  - [x] Créer un README.md
-  - [x] Finir TP1
-+ séance du 28 janvier 2022 (J.-S. Varré):
-  - [x] Finir TP2
-  - [x] Decouvrir biopython
+*   de faire ou finaliser la partie du TP2 pour la recherche d’occurrences d’une PFM
+*   recherche des occurrences et stockage d’une PWM pour une séquence
+*   rendu intermédiaire
+*   calcul de score d’une fenêtre glissante
 
----
-##  Les exigences concernant l’environnement de développement en vue de son intégration.
-- python3, et dans sa library y ajouter biopyhton.
-- être inscrit sur moodle et avoir accès au cour de l'option bioinfo
+Rendu intermédiaire
+-------------------
 
----
-##  Une instruction pour l’installation et l’utilisation.
-+ installation de [biopyhton](https://biopython.org/wiki/Download):
-  - vérifier la bonne installation en excutant l'instruction **>> Python from Bio import SeqIO** dans python
+À la fin de la séance (i.e. avant 17h00), vous devez avoir réalisé un script python, qui s’exécute en ligne de commande, prend en argument :
 
----
-##  Une liste des technologies utilisées et, le cas échéant, des liens vers d’autres informations sur ces technologies.
----
-##  Les projets open source que les développeurs modifient ou complètent par eux-mêmes doivent être complétés par un paragraphe « collaboration souhaitée » dans leur fichier readme.md. Comment contourner un problème ?  Comment les développeurs doivent-ils appliquer les modifications ?
----
-##  Bugs connus et corrections éventuelles apportées.
----
-##  Section FAQ reprenant toutes les questions posées jusqu’à présent.
----
-## Droits d’auteurs et informations sur la licence.
+*   un fichier contenant une matrice JASPAR ;
+*   un identifiant Genbank d’un mRNA ;
+*   une taille pour la séquence promotrice ;
+*   un seuil de score.
+
+et produit sur la sortie standard une liste d’occurrences dont le score est supérieur au seuil. Typiquement :
+
+    Ahr::Arnt 71 6.198700428009033
+    Ahr::Arnt -745 5.744134426116943
+    Ahr::Arnt 444 6.198700428009033
+    Ahr::Arnt 446 6.198700428009033
+    Ahr::Arnt -388 10.591017723083496
+    Ahr::Arnt 920 6.198700428009033
+
+(voir la section dédiée plus bas)
+
+Calcul de score à partir de matrices de fréquences (repris du TP2)
+------------------------------------------------------------------
+
+Nous allons maintenant utiliser Biopython pour trouver les endroits correspondant à des sites de fixation du facteur de transcription.
+
+Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](https://www.fil.univ-lille.fr/~salson/portail/bioinfo-s6/TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`. Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
+
+Le chargement de ce type fichier (matrices de fréquences) se fait avec la méthode `read` du module `motifs` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.html#Bio.motifs.read)), en lui précisant que le format est `jaspar`.
+
+- [x] 1.  Combien de matrices ont été lues ? ***=> On a lu 1 matrices***
+
+Pour chaque entrée, la matrice est accessible via l’attribut `counts`, de type `FrequencyPositionMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.FrequencyPositionMatrix)).
+
+- [x] 2.  De quelle manière allez-vous pouvoir obtenir une matrice poids-position (_position-weight matrix_, PWM) ? Quelle valeur mettez-vous pour les pseudo-poids (_pseudocounts_) ? (souvenez-vous du cours…) ***=> 0.01***
+
+Le résultat que vous obtenez doit dont être une PWM, de type `PositionWeightMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionWeightMatrix)).
+
+- [x] 3.  Comment obtenir une PSSM à partir de cette PWM ?
+
+La PSSM obtenue est de type `PositionSpecificScoringMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionSpecificScoringMatrix)).
+
+- [x] 4.  Comment rechercher les occurrences d’une PSSM dans une séquence ?
+
+Mise en place de fonctions utiles pour manipuler les PWM
+--------------------------------------------------------
+
+Toutes les fonctions seront positionnées dans un fichier `pwm.py`.
+
+- [x] 1.  Réalisez une fonction `pwm2pssm` qui, à partir d’une matrice de fréquence JASPAR (un objet `FrequencyPositionMatrix`) et d’un pseudo-poids passés en paramètre, retourne la PSSM correspondante (un objet `PositionSpecificScoringMatrix`).
+
+- [x] 2.  Réalisez une fonction `scan_sequence` qui, à partir d’une PSSM (un objet `PositionSpecificScoringMatrix`), d’une séquence (un objet Biopython `Bio.Seq`), et d’un seuil de score passés en paramètre, retourne une liste de couples position, score d’occurrence.
+
+
+Script pour le rendu intermédiaire
+----------------------------------
+
+Il est temps maintenant de consolider ce qui a été fait la semaine dernière et cette semaine.
+
+- [x] 1.  Réalisez le script `scan_pwm.py` pour le rendu intermédiaire (le pseudo-poids sera figé à la valeur 0.1). Bien sûr ce script importera les modules `pwm.py` et `utils.py`.
+
+- [x] 2.  Pour tester votre script vous pourrez faire des recherches les matrices `MA0083, MA0114, MA0056` sur `NM_007389` avec un seuil de score positionné à -2.0.
+  ```shell
+  ~/TP3$ python scan_pwm.py MA0083.jaspar NM_007389 6 -2
+  ```
+- [x] 3.  Que signifie une position d’occurrence négative ? ***Cela signifie que la séquence est plus loin de la distance moyenne moyenne***
+
+- [ ] 4.  En lien avec la question précédente, posez-vous la question de l’endroit où se trouve, vis-à-vis du début du gène, la position d’occurrence d’une matrice fournie par votre script.
