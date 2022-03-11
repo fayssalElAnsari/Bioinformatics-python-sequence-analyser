@@ -52,7 +52,7 @@ def mrna_to_gene(pmid):
         return ValueError(str(pmid) + " : wrong id value passed")
         
 
-def upstream_gene_seq(pmid):
+def upstream_gene_seq(pmid, taille_seq):
     '''
     à partir d’un identifiant de gène et d’une longueur retourne un objet Biopython Bio.Seq 
     correspondant à la séquence ADN amont de ce gène de la longueur demandée 
@@ -63,9 +63,9 @@ def upstream_gene_seq(pmid):
     handle = Entrez.esummary(db="gene", id=mrna_to_gene(pmid))
     record = Entrez.read(handle)
     handle.close()
-    print(json.dumps(record, indent=2, separators=(", ", " : ")))
+    # print(json.dumps(record, indent=2, separators=(", ", " : ")))
     # print(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
-    return record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
+    return str(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
 
 
 def download_promotors(l_mrna, taille_seq, dir="."):
@@ -80,18 +80,29 @@ def download_promotors(l_mrna, taille_seq, dir="."):
     les séquences promotrices de ces mRNA au format FASTA
     '''
     for mrna in l_mrna:
-        nom_fichier = str(mrna) + "_" + str(taille_seq) + ".fa"
+        nom_fichier = str(mrna) + "_" + str(taille_seq) + ".fasta"
         chemin_fichier = os.path.join(os.getcwd(), "data", nom_fichier)
-        # id = Entrez.read(Entrez.esearch(db="genbank", term=mrna))
+        
         id = mrna_to_gene(mrna)
         print(id)
-        fast_handle = Entrez.efetch(db="nucleotide", id=id, rettype="fasta", retmode="text").read()
-        print(fast_handle)
-        # sequence = Entrez.read(gb_handle)
-        # print(sequence)
+        print(upstream_gene_seq(mrna, taille_seq))
+
+        # try:
+        #     fasta_handle = Entrez.efetch(db="nucleotide", id=id, rettype="fasta", retmode="text", retmax=taille_seq)
+        #     output_seq = fasta_handle.read()
+        #     fasta_handle.close()
+        #     print(output_seq)
+
+        #     output_file = open(chemin_fichier, "w")
+        #     output_file.write(output_seq)
+        #     output_file.close()
+        # except:
+        #     print("couldn't fetch sequence with id " + id)
+
+        
 
 if __name__ == "__main__":
     list_mrna = ["NM_007389", "NM_079420", "NM_001267550", "NM_002470", "NM_003279", "NM_005159", 
     "NM_003281", "NM_002469", "NM_004997", "NM_004320", "NM_001100", "NM_006757"]
-    download_promotors(list_mrna, 1024, "../data")
+    download_promotors(list_mrna, 10, "../data")
     # doctest.testmod()
