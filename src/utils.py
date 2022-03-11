@@ -59,14 +59,18 @@ def upstream_gene_seq(pmid, taille_seq):
     
      /!\ (attention au brin sur lequel se trouve le gène).
     '''
-    """ renvoie le numéro d'acension"""
-    handle = Entrez.esummary(db="gene", id=mrna_to_gene(pmid))
+    """ renvoie le numéro d'accession"""
+    id = mrna_to_gene(pmid)
+    handle = Entrez.esummary(db="gene", id=id)
     record = Entrez.read(handle)
     handle.close()
     # print(json.dumps(record, indent=2, separators=(", ", " : ")))
-    # print(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
-    return str(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"])
-
+    accession_nb = record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
+    seq_start = int(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"]) - taille_seq
+    seq_stop = int(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"])-1
+    
+    fasta_handle = Entrez.efetch(db="nucleotide", id=accession_nb, rettype="fasta", retmode="text", strand=1, seq_start=seq_start, seq_stop=seq_stop)
+    return fasta_handle.read()
 
 def download_promotors(l_mrna, taille_seq, dir="."):
     '''
@@ -84,25 +88,16 @@ def download_promotors(l_mrna, taille_seq, dir="."):
         chemin_fichier = os.path.join(os.getcwd(), "data", nom_fichier)
         
         id = mrna_to_gene(mrna)
-        print(id)
-        print(upstream_gene_seq(mrna, taille_seq))
+        output_seq = upstream_gene_seq(mrna, taille_seq)
 
-        # try:
-        #     fasta_handle = Entrez.efetch(db="nucleotide", id=id, rettype="fasta", retmode="text", retmax=taille_seq)
-        #     output_seq = fasta_handle.read()
-        #     fasta_handle.close()
-        #     print(output_seq)
+        output_file = open(chemin_fichier, "w")
+        output_file.write(output_seq)
+        output_file.close()
+        print("Wrote to file: " + nom_fichier)
 
-        #     output_file = open(chemin_fichier, "w")
-        #     output_file.write(output_seq)
-        #     output_file.close()
-        # except:
-        #     print("couldn't fetch sequence with id " + id)
-
-        
 
 if __name__ == "__main__":
     list_mrna = ["NM_007389", "NM_079420", "NM_001267550", "NM_002470", "NM_003279", "NM_005159", 
     "NM_003281", "NM_002469", "NM_004997", "NM_004320", "NM_001100", "NM_006757"]
-    download_promotors(list_mrna, 10, "../data")
+    download_promotors(list_mrna, 1024, "../data")
     # doctest.testmod()
