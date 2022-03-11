@@ -81,6 +81,9 @@ def download_promotors(l_mrna, taille_seq, dir="."):
         sequence = Entrez.efetch(db="gb", id=id, rettype="fasta", retmode="text") 
         print(sequence)
 
+
+
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
