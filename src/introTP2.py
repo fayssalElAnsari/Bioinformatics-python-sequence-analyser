@@ -84,11 +84,9 @@ gb_handle.close()
 #         print(i.location.start,i.location.end)
 #         print(find_cds(gb_record))
 
-def efetch(mail,id,rettype):
-    pass
 
-
-#         print([i.location.start,i.location.end]==find_cds(gb_record))
+print(fasta_record)
+    
 # elink
     # 1. récupérer le gène correspondant à l’entrée `NM_007389`
 gb_handle_elink = Entrez.elink(dbfrom="nucleotide",db="gene", id="NM_007389")
@@ -97,9 +95,11 @@ gb_handle_elink.close()
 # print(gb_record_elink)
     # 2. Identifiez comment trouver l’identifiant du gène.
 # mrna_to_gene("NM_007389")
+# for link in record[0]["LinkSetDb"][0]["Link"]:
+#     print(link["Id"])
 # ou
 linked = [link["Id"] for link in gb_record_elink[0]["LinkSetDb"][0]["Link"]]
-# print(linked[0])
+# print(linked)
 # ou
 # print(gb_record_elink[0]["LinkSetDb"][0]["Link"][0]["Id"])
 
