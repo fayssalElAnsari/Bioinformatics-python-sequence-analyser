@@ -27,3 +27,10 @@ Sur la première ligne, commençant par LOCUS on a notamment:
 l’identifiant de cet ARN messager (commençant par NM_)  => NM_007389,
 sa taille en nucléotides  => 4320,
 le type de molécule => mRNA.
+
+```pyhton
+from Bio import SeqIO
+from utils import *
+from Bio import Entrez
+
+```
