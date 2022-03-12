@@ -1,7 +1,9 @@
 from Bio import SeqIO, Entrez, motifs
 from Bio.SeqFeature import FeatureLocation
 from Bio.Seq import Seq
+from utils import *
 import json
+from pprint import *
 
 Entrez.email = "fayssal.el.ansari@gmail.com"
 
@@ -58,36 +60,82 @@ def pwm2pssm(matrix, pseudo_weight, v = False):
 
 def scan_sequence(pssm, seqstring, seuil):
     '''
-    scan l'existance d'une sequence au dessus d'un seuil dans mune PSSM
+    scan l'existance d'une sequence au dessus d'un seuil dans une PSSM
+    renvoie une liste de (position, score) pour la 'pssm' dans 'seqstring'
     '''
-    l = list()
+    pos_score_list = list()
     seq = Seq(seqstring)
-    print("recherche de la Seq(" + seqstring + ") avec un seuil de ", seuil , " : ")
+    # print("recherche de la Seq(" + seqstring + ") avec un seuil de ", seuil , " : ")
     try:
         for position, score in pssm.search(seq, seuil):
-            l.append((position, score))
+            pos_score_list.append((position, score))
     except:
         pass
-    return l
+    return pos_score_list
 
-def scan_sequences(pssm, seq_list, seuil):
+def scan_all_sequences(pssm, seq_list, seuil):
     '''
-    cette fonction fait la meme chose que scan sequence mais cette fois pour 
-    une liste de sequence au lieu d'une seul sequence
+    applique la fonction `scan_sequence()` deja definie sur une liste de sequences
+    et retourne le resultat sous forme de liste de liste
+    pour chaque pmid la liste de (pos, score) qui lui correspond
     '''
-    liste_pos_score = []
+    seq_pos_score = list()
     for seq in seq_list:
-        liste_pos_score.append(scan_sequence(pssm, seq, seuil))
-    return liste_pos_score
+        seq_pos_score.append(scan_sequence(pssm, seq, seuil))
+    return seq_pos_score
 
 def main():
-    list_seq = SeqIO.read("../data/NM_007389.fasta", "fasta")
-    with open("../data/MA0037.jaspar") as handle:
+    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
+
+    list_seq = []
+    generated_files = []
+    for mrna in LIST_MRNA:
+        generated_files.append("./data/" + mrna + "_1024.fasta")
+
+    for file_path in generated_files:
+        list_seq.append(SeqIO.read(file_path, "fasta").seq)
+    '''
+    generated dictionary format:
+        dictionary : {
+            'pssm1' :
+                {'pmid_1': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+                {'pmid_2': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+                ...
+                ..
+                .
+                {'pmid_n': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+            'pssm2' :
+                {'pmid_1': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+                {'pmid_2': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+                ...
+                ..
+                .
+                {'pmid_n': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+            ...
+            ..
+            .
+            'pssm_n' :
+                {'pmid_1': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+                {'pmid_2': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+                ...
+                ..
+                .
+                {'pmid_n': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
+        }
+    '''
+    matrix_entry = {}
+    mrna_entry = {}
+    pos_score_list = []
+    with open("./data/MA0037.jaspar") as handle: #one matrix for starters
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
-            # scan_res = scan_sequence(pssm, "AGATAAGA", 1)
-            # print(scan_res)
-            print(scan_sequences(pssm, list_seq, -20))
+            pos_score_list.append(scan_all_sequences(pssm, list_seq, -20))
+            for file_name, pos_score in zip(generated_files, pos_score_list[0]):
+                mrna_entry[file_name] = pos_score
+            matrix_entry[matrix] = mrna_entry
+        pprint(matrix_entry)
+
+
 
 if __name__ == "__main__":
     main()
