@@ -1,4 +1,3 @@
-
 TP4 - Recherche d’occurrences de matrices PFM dans un ensemble de séquences
 ===========================================================================
 
@@ -127,7 +126,7 @@ Il est temps maintenant de consolider ce qui a été fait la semaine dernière e
 
 - [x] 2.  Pour tester votre script vous pourrez faire des recherches les matrices `MA0083, MA0114, MA0056` sur `NM_007389` avec un seuil de score positionné à -2.0.
   ```shell
-  ~/TP3$ python scan_pwm.py MA0083.jaspar NM_007389 6 -2
+  python src/scan_pwm.py MA0083.jaspar NM_007389 6 -2
   ```
 - [x] 3.  Que signifie une position d’occurrence négative ? ***Cela signifie que la séquence est plus loin de la distance moyenne moyenne***
 
