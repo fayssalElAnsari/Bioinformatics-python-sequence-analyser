@@ -84,6 +84,20 @@ def scan_all_sequences(pssm, seq_list, seuil):
         seq_pos_score.append(scan_sequence(pssm, seq, seuil))
     return seq_pos_score
 
+def score_window(res_scan, coord_start, coord_stop):
+    '''
+    étant donné un résultat de scan_all_sequences et des coordonnées 
+    début/fin dans les séquences, retourne le score de la fenêtre.
+    '''
+    pass
+    for matrix in res_scan:
+        for sequences in matrix:
+            for seq in sequences:
+                for (pos, score) in seq:
+                    if (pos < coord_start or pos > coord_start): #need to be edited
+                        matrix[seq][pos]
+
+
 def main():
     # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
 
@@ -97,14 +111,14 @@ def main():
     '''
     generated dictionary format:
         dictionary : {
-            'pssm1' :
+            'pssm_1.consensus' :
                 {'pmid_1': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
                 {'pmid_2': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
                 ...
                 ..
                 .
                 {'pmid_n': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
-            'pssm2' :
+            'pssm_2.consensus' :
                 {'pmid_1': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
                 {'pmid_2': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
                 ...
@@ -114,7 +128,7 @@ def main():
             ...
             ..
             .
-            'pssm_n' :
+            'pssm_n.consensus' :
                 {'pmid_1': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
                 {'pmid_2': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
                 ...
@@ -130,9 +144,9 @@ def main():
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
             pos_score_list.append(scan_all_sequences(pssm, list_seq, -20))
-            for file_name, pos_score in zip(generated_files, pos_score_list[0]):
+            for file_name, pos_score in zip(generated_files, pos_score_list[0]): # need to fix the use of [0]
                 mrna_entry[file_name] = pos_score
-            matrix_entry[matrix] = mrna_entry
+            matrix_entry[matrix.consensus] = mrna_entry #will use consensus for readability
         pprint(matrix_entry)
 
 
