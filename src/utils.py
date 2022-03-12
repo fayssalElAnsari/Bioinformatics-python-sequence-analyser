@@ -1,5 +1,6 @@
 from Bio import SeqIO, Entrez
 from Bio.SeqFeature import FeatureLocation
+from constants import *
 import json, os, doctest
 
 Entrez.email = "fayssal.el.ansari@gmail.com"
@@ -68,7 +69,6 @@ def upstream_gene_seq(pmid, taille_seq):
     accession_nb = record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrAccVer"]
     seq_start = int(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"]) - taille_seq
     seq_stop = int(record["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStart"])-1
-    
     fasta_handle = Entrez.efetch(db="nucleotide", id=accession_nb, rettype="fasta", retmode="text", strand=1, seq_start=seq_start, seq_stop=seq_stop)
     return fasta_handle.read()
 
@@ -82,7 +82,10 @@ def download_promotors(l_mrna, taille_seq, dir="."):
     Etant donné une liste d’identifiants de mRNA, une taille de séquence promotrice, 
     un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés 
     les séquences promotrices de ces mRNA au format FASTA
+
+    et renvoie la liste des fichiers generer 
     '''
+    list_files = []
     for mrna in l_mrna:
         nom_fichier = str(mrna) + "_" + str(taille_seq) + ".fasta"
         chemin_fichier = os.path.join(os.getcwd(), "data", nom_fichier)
@@ -94,10 +97,12 @@ def download_promotors(l_mrna, taille_seq, dir="."):
         output_file.write(output_seq)
         output_file.close()
         print("Wrote to file: " + nom_fichier)
+        list_files.append(chemin_fichier)
+    return list_files
+        
 
 
 if __name__ == "__main__":
-    list_mrna = ["NM_007389", "NM_079420", "NM_001267550", "NM_002470", "NM_003279", "NM_005159", 
-    "NM_003281", "NM_002469", "NM_004997", "NM_004320", "NM_001100", "NM_006757"]
-    download_promotors(list_mrna, 1024, "../data")
+    download_promotors(LIST_MRNA, 1024, "../data")
     # doctest.testmod()
+
