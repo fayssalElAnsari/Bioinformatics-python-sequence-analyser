@@ -16,7 +16,7 @@ def find_cds(seqRecord):
     Example:
     >>> genebank = SeqIO.read("./data/NM_007389.gb", "genbank")
     >>> print(find_cds(genebank))
-    [(ExactPosition(51), ExactPosition(1426))]
+    [(ExactPosition(51), ExactPosition(1425))]
     '''
     liste_positions = []
     for feature in seqRecord.features:
