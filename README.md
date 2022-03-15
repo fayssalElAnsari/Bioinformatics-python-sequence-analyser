@@ -42,7 +42,26 @@ Les identifiants des mRNA seront donnés en argument (et pas en option). Le scri
 
 Ce script préfigure le script de rendu final.
 
+## SET-UP
 
+* Un environement virtuel au nom de `virtual_env` a ete cree pour filtrer que les packages necessaires pour ce projet:
+```console
+pip install virtualenv
+python -m virtualenv virtual_env
+```
+* Pour activer l'environement virtuel:
+```console
+.\virtual_env\Scripts\activate  
+```
+* Apres avoir installer tout les packages necessaires. Pour les entregistrer dans un fichier `requirements.txt`
+```console
+pip freeze > requirements.txt
+```
+
+* Donc pour installer les packages necessaires il suffit d'executer la commande:
+```console
+pip install -r requirements.txt
+```
 
 TP3 - Recherche d’occurrences de matrices PFM
 =============================================

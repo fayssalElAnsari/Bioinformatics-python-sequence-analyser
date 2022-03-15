@@ -1,4 +1,4 @@
-from Bio import Entrez
+from Bio import Entrez, SeqIO
 from constants import LIST_MRNA
 import os
 import doctest
@@ -14,7 +14,7 @@ def find_cds(seqRecord):
     Cette fonction prend en parametre une sequence et retourne les CDNs
 
     Example:
-    >>> genebank = SeqIO.read("../data/NM_007389.gb", "genbank")
+    >>> genebank = SeqIO.read("./data/NM_007389.gb", "genbank")
     >>> print(find_cds(genebank))
     [(ExactPosition(51), ExactPosition(1425))]
     '''
@@ -109,6 +109,6 @@ def download_promotors(l_mrna, taille_seq, dir="."):
         
 
 if __name__ == "__main__":
-    download_promotors(LIST_MRNA, 1024, "../data")
-    # doctest.testmod()
+    # download_promotors(LIST_MRNA, 1024, "../data")
+    doctest.testmod()
 
