@@ -29,7 +29,7 @@ def jaspar2pwm():
             pssm = pwm2.log_odds() 
             print(pssm)
             print("PWM score for 'ACGTACGT': ")
-            calculate_res = pssm.calculate(Seq("ACGTACGT"))
+            calculate_res = pssm.calculate(pssm.consensus)
             print(calculate_res)
             max_score = pssm.max
             min_score = pssm.min
@@ -78,37 +78,7 @@ def scan_all_sequences(pssm, seq_list, seuil):
     applique la fonction `scan_sequence()` deja definie sur une liste de sequences
     et retourne le resultat sous forme de liste de liste
     pour chaque pmid la liste de (pos, score) qui lui correspond
-    '''
-    seq_pos_score = list()
-    for seq in seq_list:
-        seq_pos_score.append(scan_sequence(pssm, seq, seuil))
-    return seq_pos_score
 
-def score_window(res_scan, coord_start, coord_stop):
-    '''
-    étant donné un résultat de scan_all_sequences et des coordonnées 
-    début/fin dans les séquences, retourne le score de la fenêtre.
-    '''
-    pass
-    for matrix in res_scan:
-        for sequences in matrix:
-            for seq in sequences:
-                for (pos, score) in seq:
-                    if (pos < coord_start or pos > coord_start): #need to be edited
-                        matrix[seq][pos]
-
-
-def main():
-    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
-
-    list_seq = []
-    generated_files = []
-    for mrna in LIST_MRNA:
-        generated_files.append("./data/" + mrna + "_1024.fasta")
-
-    for file_path in generated_files:
-        list_seq.append(SeqIO.read(file_path, "fasta").seq)
-    '''
     generated dictionary format:
         dictionary : {
             'pssm_1.consensus' :
@@ -136,19 +106,52 @@ def main():
                 .
                 {'pmid_n': [(pos1,score1), (pos2, score2),..., (pos_n, score_n)]},
         }
+
     '''
     matrix_entry = {}
     mrna_entry = {}
     pos_score_list = []
-    with open("./data/MA0037.jaspar") as handle: #one matrix for starters
+
+    seq_pos_score = list()
+    for seq in seq_list:
+        seq_pos_score.append(scan_sequence(pssm, seq, seuil))
+    return seq_pos_score
+
+def score_window(res_scan, coord_start, coord_stop):
+    '''
+    étant donné un résultat de scan_all_sequences et des coordonnées 
+    début/fin dans les séquences, retourne le score de la fenêtre.
+    '''
+    for matrix in res_scan:
+        for sequences in matrix:
+            for seq in sequences:
+                for (pos, score) in seq:
+                    if (pos < coord_start or pos > coord_start): #need to be edited
+                        res_scan[matrix][seq].remove((pos, score))
+    return res_scan
+
+
+def main():
+    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
+
+    list_seq = []
+    generated_files = []
+    for mrna in LIST_MRNA:
+        generated_files.append("./data/" + mrna + "_1024.fasta")
+
+    for file_path in generated_files:
+        list_seq.append(SeqIO.read(file_path, "fasta").seq)
+    matrix_entry = {}
+    mrna_entry = {}
+    pos_score_list = []
+    with open("./data/MA0037.jaspar") as handle: # one matrix for starters
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
             pos_score_list.append(scan_all_sequences(pssm, list_seq, -20))
             for file_name, pos_score in zip(generated_files, pos_score_list[0]): # need to fix the use of [0]
                 mrna_entry[file_name] = pos_score
-            matrix_entry[matrix.consensus] = mrna_entry #will use consensus for readability
+            matrix_entry[matrix.consensus] = mrna_entry # will use consensus for readability
         pprint(matrix_entry)
-
 
 
 if __name__ == "__main__":
