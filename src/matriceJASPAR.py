@@ -23,5 +23,5 @@ def matricesJaspar(list_matrice):
 if __name__ == "__main__":
     #sur le shell
     # Exemple:
-    # ~/bioinfo-tps-el_ansari-pastor_rojas/src$python3 jasparTest.py MA0037.3 MA0001
+    # ~/bioinfo-tps-el_ansari-pastor_rojas/src$python3 matriceJASPAR.py MA0037.3 MA0001
     matricesJaspar(sys.argv[1:len(sys.argv)])
