@@ -8,7 +8,7 @@ from pprint import *
 Entrez.email = "fayssal.el.ansari@gmail.com"
 
 def jaspar2pwm():
-    ''' 
+    '''
     cette fonction est la reponse a la premiere partie du TP3
     on genere une matrice de frequence on la normalise pour
     obtenir la PWM, a partir de cette matrice on genere la PSSM
@@ -26,7 +26,7 @@ def jaspar2pwm():
             print(pwm) # 50 by trial to get a 0.0x difference
             pwm2 = m.counts.normalize(0.01)
             print("PSSM")
-            pssm = pwm2.log_odds() 
+            pssm = pwm2.log_odds()
             print(pssm)
             print("PWM score for 'ACGTACGT': ")
             calculate_res = pssm.calculate(pssm.consensus)
@@ -53,7 +53,7 @@ def pwm2pssm(matrix, pseudo_weight, v = False):
     pwm2 = matrix.counts.normalize(pseudo_weight)
     if v:
         print("PSSM")
-    pssm = pwm2.log_odds() 
+    pssm = pwm2.log_odds()
     if v:
         print(pssm)
     return pssm
@@ -119,7 +119,7 @@ def scan_all_sequences(pssm, seq_list, seuil):
 
 def score_window(res_scan, coord_start, coord_stop):
     '''
-    étant donné un résultat de scan_all_sequences et des coordonnées 
+    étant donné un résultat de scan_all_sequences et des coordonnées
     début/fin dans les séquences, retourne le score de la fenêtre.
     '''
     for matrix in res_scan:
@@ -130,17 +130,22 @@ def score_window(res_scan, coord_start, coord_stop):
                         res_scan[matrix][seq].remove((pos, score))
     return res_scan
 
-
-def main():
-    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
-
-    list_seq = []
+def generatedFiles():
     generated_files = []
     for mrna in LIST_MRNA:
         generated_files.append("./data/" + mrna + "_1024.fasta")
+    return generated_files
 
+def listSeq(generated_files):
+    list_seq = []
     for file_path in generated_files:
         list_seq.append(SeqIO.read(file_path, "fasta").seq)
+    return list_seq
+
+def main():
+    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
+    generated_files = generatedFiles()
+    list_seq = listSeq(generated_files)
     matrix_entry = {}
     mrna_entry = {}
     pos_score_list = []
