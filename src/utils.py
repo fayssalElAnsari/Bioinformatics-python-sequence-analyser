@@ -108,6 +108,9 @@ def download_promotors(l_mrna, taille_seq, dir="."):
     return list_files
         
 
+
+
+
 if __name__ == "__main__":
     # download_promotors(LIST_MRNA, 1024, "../data")
     doctest.testmod()
