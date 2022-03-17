@@ -7,8 +7,7 @@ Entrez.email = "fayssal.el.ansari@gmail.com"
 # TODO: faut modifier cette fonction pour accepter
 # une seqRecord avec plusieurs sequences
 def find_cds(seqRecord): #marche
-    '''
-    Cette fonction prend en parametre une sequence et retourne les CDNs
+    '''Renvoie une liste des couples de positions de début et de fin des CDS contenues dans la séquence seqRecord
 
     Example:
     >>> genebank = SeqIO.read("../data/NM_007389.gb", "genbank")
@@ -34,8 +33,8 @@ def geneID(NM):
     print(record_elink)
     for link in record_elink[0]["LinkSetDb"][0]["Link"]:
         l.append(link["Id"])
-    return l 
-    
+    return l
+
 def mrna_to_gene(gene_NM_):
     '''
     renvoie l’identifiant du gène (gene_ID) (de type <class 'Bio.Entrez.Parser.StringElement'> )
@@ -51,7 +50,7 @@ def mrna_to_gene(gene_NM_):
         assert record_elink[0]["LinkSetDb"] != [] #mrna_to_gene("19304878") il est correct mais ...
         for link in record_elink[0]["LinkSetDb"][0]["Link"]:
             l.append(link["Id"])
-        return l 
+        return l
     except AssertionError as ve:
         return ValueError(str(gene_NM_) + " : wrong id value passed")
 
@@ -96,9 +95,6 @@ def postion_chromosomique_gene_fin(gene_ID):
         return record_esummary["DocumentSummarySet"]["DocumentSummary"][0]["GenomicInfo"][0]["ChrStop"]
     except AssertionError as ve:
         return ValueError(str(gene_ID) + " : wrong id value passed")
-    
-
-    
 
 def compare_rec_seq(record1, record2):
     '''
@@ -115,9 +111,8 @@ def compare_rec_seq(record1, record2):
 
 def upstream_gene_seq(pmid):
     '''
-    à partir d’un identifiant de gène et d’une longueur retourne un objet Biopython Bio.Seq 
-    correspondant à la séquence ADN amont de ce gène de la longueur demandée 
-    
+    à partir d’un identifiant de gène et d’une longueur retourne un objet Biopython Bio.Seq
+    correspondant à la séquence ADN amont de ce gène de la longueur demandée
      /!\ (attention au brin sur lequel se trouve le gène).
     '''
     """ renvoie le numéro d'acension"""
@@ -137,8 +132,8 @@ def download_promotors(l_mrna, taille_seq, dir="."):
     * taille_seq: une taille de sequence de gene a recuperer
     * dir: le repetoire destination
 
-    Etant donné une liste d’identifiants de mRNA, une taille de séquence promotrice, 
-    un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés 
+    Etant donné une liste d’identifiants de mRNA, une taille de séquence promotrice,
+    un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés
     les séquences promotrices de ces mRNA au format FASTA
     '''
     for mrna in l_mrna:
