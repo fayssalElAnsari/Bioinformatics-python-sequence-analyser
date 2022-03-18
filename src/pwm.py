@@ -145,7 +145,7 @@ def main():
     # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
     generated_files = generatedFiles()
     list_seq = listSeq(generated_files)
-    afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
+    # afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
     #l=["./data/MA0114.jaspar","./data/MA0056.jaspar"]
     #afficheMatrices(generated_files,list_seq,l)
 
