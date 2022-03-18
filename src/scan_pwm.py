@@ -28,7 +28,7 @@ def main(args):
     with open(fichier) as handle:
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, pseudo_weight, False)
-            scan_res = scan_sequence(pssm, seq, seuilScore)
+            scan_res = scan_sequence(pssm, seq, seuilScore).get_result()
     
     for position, score in scan_res:
         print("Ahr::Arnt " + str(position) + " " + str(score)) 
