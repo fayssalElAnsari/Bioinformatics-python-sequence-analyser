@@ -4,7 +4,8 @@ import sys
 
 def main(args):
     if (len(args) < 4): 
-        print("please add params!")
+        print("usage: python src/scan_pwm.py file idGenbank tailleSequencePromotrice seuilScore")
+        print("     example: python src/scan_pwm.py MA0083.jaspar NM_007389 6 -20")
         exit()
     # fichier contenant une matrice JASPAR (dirrection dossier)
     # print(args[0])

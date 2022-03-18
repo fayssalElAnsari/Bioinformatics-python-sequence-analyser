@@ -46,6 +46,10 @@ class SequenceResult:
     def append_pos_score(self, pos_score):
         self._result.append(pos_score)
 
+
+    def remove_pos_score(self, pos_score):
+        self._result.remove(pos_score)
+
     def __str__(self):
         name = str(self.get_name()) + ":\n\t\t"
         str_result = ""
