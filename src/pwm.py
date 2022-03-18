@@ -129,6 +129,7 @@ def generatedFiles():
         generated_files.append("./data/" + mrna + "_1024.fasta")
     return generated_files
 
+
 def listSeq(generated_files):
     """Renvoie une List<class 'Bio.Seq.Seq'>, une liste des séquences de chaque chemin issue de la liste passé en paramètre
     Prend un parametre de type List<str>, une liste contenant les chemins des fichier .fasta contenant des séquences
@@ -137,6 +138,7 @@ def listSeq(generated_files):
     for file_path in generated_files:
         list_seq.append(SeqIO.read(file_path, "fasta").seq)
     return list_seq
+
 
 def afficheMatrice(generated_files, list_seq, e):
     matrices = list()
@@ -147,9 +149,11 @@ def afficheMatrice(generated_files, list_seq, e):
         for matrix in matrices:
             print(matrix)
 
+
 def afficheMatrices(generated_files, list_seq, destMatricesJaspar):
     for e in destMatricesJaspar:
         afficheMatrice(generated_files, list_seq, e)
+
 
 def main():
     # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
@@ -160,6 +164,7 @@ def main():
     # afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
     l=["./data/MA0037.jaspar","./data/MA0083.jaspar"]
     afficheMatrices(generated_files,list_seq,l)
+
 
 if __name__ == "__main__":
     main()

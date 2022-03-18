@@ -15,7 +15,16 @@ class test_utils(unittest.TestCase):
         pass
 
     def download_promotors(self):
-        pass
+        """
+        dans ce test on essaye de telecharger les matrice
+        a partir d'une liste de MRNA qui se trouve dans
+        le fichier constantes.py : LIST_MRNA
+        on doit verifier que la taille des sequences telecherges
+        correspond bien a la taille passe en parametre de
+        la fonction download_promotors
+        """
+        generated_files = download_promotors(LIST_MRNA, 1024, "../data")
+        
 
 if __name__ == "__main__":
     unittest.main()

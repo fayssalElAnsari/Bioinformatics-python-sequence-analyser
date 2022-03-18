@@ -24,11 +24,6 @@ def find_cds(seqRecord):
             liste_positions.append((feature.location.start,
                                     feature.location.end))
     return liste_positions
-    # liste_positions = []
-    # for featureLoc in FeatureLocation(seqRecord.start, seqRecord.end):
-    #     liste_positions.append(featureLoc)
-    # return liste_positions
-
 
 def compare_rec_seq(record1, record2):
     '''
@@ -107,9 +102,6 @@ def download_promotors(l_mrna, taille_seq, dir="."):
         list_files.append(chemin_fichier)
     return list_files
         
-
-
-
 
 if __name__ == "__main__":
     # download_promotors(LIST_MRNA, 1024, "../data")
