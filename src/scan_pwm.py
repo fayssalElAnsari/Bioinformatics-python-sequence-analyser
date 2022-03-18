@@ -2,6 +2,7 @@ from pwm import *
 from utils import *
 import sys
 
+
 def main(args):
     if (len(args) < 4): 
         print("usage: python src/scan_pwm.py file idGenbank tailleSequencePromotrice seuilScore")
@@ -32,11 +33,12 @@ def main(args):
 
     with open(fichier) as handle:
         for matrix in motifs.parse(handle, "jaspar"):
-            matrix_id = matrix.matrix_id
+            Ahr = matrix.matrix_id
+            Arnt = matrix.name
             pssm = pwm2pssm(matrix, pseudo_weight, False)
             scan_res = scan_sequence(pssm, seq, seuilScore).get_result()
             for position, score in scan_res:
-                print(matrix_id + " " + str(position) + " " + str(score)) 
+                print(Ahr + "::" + Arnt +  " " + str(position) + " " + str(score)) 
 
 
 if __name__ == "__main__":
