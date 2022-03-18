@@ -2,7 +2,7 @@
 bioinfo-tps-el_ansari-pastor_rojas.zip
 .vscode/settings.json
 
-
+**/.vscode/**
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,windows,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,linux,windows,python
