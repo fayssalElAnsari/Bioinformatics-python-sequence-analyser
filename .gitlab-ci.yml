@@ -6,13 +6,14 @@
 
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/python/tags/
-image: python:latest
+# image: python:latest
 
 test:doctest:
-    image: python:3.6
+    image: python:latest
     script:
         - pip install -r ./requirements.txt
         - python -m doctest -v ./src/utils.py
+        - python -m unittest 
 
 # Change pip's cache directory to be inside the project directory since we can
 # only cache local items.
