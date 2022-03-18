@@ -113,7 +113,7 @@ def score_window(res_scan, coord_start, coord_stop):
         for sequences in matrix:
             for seq in sequences:
                 for (pos, score) in seq:
-                    if (pos < coord_start or pos > coord_start): #need to be edited
+                    if (pos < coord_start or pos > coord_start): #needs to be edited
                         res_scan[matrix][seq].remove((pos, score))
     return res_scan
 
@@ -130,6 +130,7 @@ def listSeq(generated_files):
 
     matrices = list()
 
+
     with open("./data/MA0037.jaspar") as handle: # one matrix for starters
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
@@ -137,9 +138,9 @@ def listSeq(generated_files):
         for matrix in matrices:
             print(matrix)
 
-def afficheMatrices(generated_files,list_seq,destMatricesJaspar):
+def afficheMatrices(generated_files, list_seq, destMatricesJaspar):
     for e in destMatricesJaspar:
-        afficheMatrice(generated_files,list_seq,e)
+        afficheMatrice(generated_files, list_seq, e)
 
 def main():
     # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files

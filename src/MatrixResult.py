@@ -43,6 +43,10 @@ class MatrixResult:
         self._result.append(seq_pos_score)
 
     def __str__(self):
-        return str(self.get_name()) + ": " + str([str(result) for result in self.get_result()])
+        name = "* " + str(self.get_name()) + ":\n\t"
+        str_result = ""
+        for seq in self.get_result():
+            str_result =  str_result + "\n\t\t" + str(seq)
+        return  name + str_result
 
     
