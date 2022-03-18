@@ -33,12 +33,11 @@ def main(args):
 
     with open(fichier) as handle:
         for matrix in motifs.parse(handle, "jaspar"):
-            Ahr = matrix.matrix_id
-            Arnt = matrix.name
+            name = matrix.name
             pssm = pwm2pssm(matrix, pseudo_weight, False)
             scan_res = scan_sequence(pssm, seq, seuilScore).get_result()
             for position, score in scan_res:
-                print(Ahr + "::" + Arnt +  " " + str(position) + " " + str(score)) 
+                print(name + " " + str(position) + " " + str(score)) 
 
 
 if __name__ == "__main__":
