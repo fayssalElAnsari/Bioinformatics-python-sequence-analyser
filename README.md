@@ -1,18 +1,17 @@
 TP4 - Recherche d’occurrences de matrices PFM dans un ensemble de séquences
 ===========================================================================
-
-    Recherche pour un ensemble de séquences
-    Le module de gestion des arguments argparse de Python
+Recherche pour un ensemble de séquences.  
+Le module de gestion des arguments argparse de Python
 
 ## L’objectif de ce TP est :
 
-    d’étendre le travail du TP3 pour la recherche d’occurrences d’une PFM pour un esnemble de séquences et non plus une seule séquence
+d’étendre le travail du TP3 pour la recherche d’occurrences d’une PFM pour un esnemble de séquences et non plus une seule séquence
 
 Recherche pour un ensemble de séquences
 
 Dans la suite du projet nous allons rechercher les occurrences de matrices dans un ensemble de séquences.
 
-    Ajouter à utils.py une fonction download_promotors qui, étant donné une liste d’identifiants de mRNA, une taille de séquence promotrice, un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés les séquences promotrices de ces mRNA au format FASTA. Les noms des fichiers seront les nom des identifiants mRNA suivi de la longueur du promoteur (par exemple, le promoteur de taille 100 de NM_007389 sera stocké dans le fichier NM_007389_100.fa).
+Ajouter à utils.py une fonction download_promotors qui, étant donné une liste d’identifiants de mRNA, une taille de séquence promotrice, un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés les séquences promotrices de ces mRNA au format FASTA. Les noms des fichiers seront les nom des identifiants mRNA suivi de la longueur du promoteur (par exemple, le promoteur de taille 100 de NM_007389 sera stocké dans le fichier NM_007389_100.fa).
 
 La construction d’un chemin valide se fait grâce à os.path.join (voir documentation de os.path)
 
