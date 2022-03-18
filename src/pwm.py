@@ -118,6 +118,11 @@ def score_window(res_scan, coord_start, coord_stop):
     return res_scan
 
 def generatedFiles():
+    """Renvoie une liste de type str contenant
+    toutes les chemins dans ""../data",
+    les fichiers contenant dans la list LIST_MRNA (se trouvant dans src/constant.py)
+    et finissant par "_1024"
+    """
     generated_files = []
     for mrna in LIST_MRNA:
         generated_files.append("./data/" + mrna + "_1024.fasta")
