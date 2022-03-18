@@ -46,7 +46,7 @@ class MatrixResult:
         name = "* " + str(self.get_name()) + ":\n\t"
         str_result = ""
         for seq in self.get_result():
-            str_result =  str_result + "\n\t\t" + str(seq)
+            str_result =  str_result + "\n\t" + str(seq)
         return  name + str_result
 
     

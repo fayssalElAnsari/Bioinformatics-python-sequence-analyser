@@ -110,12 +110,13 @@ def score_window(res_scan, coord_start, coord_stop):
     début/fin dans les séquences, retourne le score de la fenêtre.
     '''
     for matrix in res_scan:
-        for sequences in matrix:
-            for seq in sequences:
-                for (pos, score) in seq:
+        for sequences in matrix.get_result():
+            for score_pos_list in sequences.get_result():
+                for (pos, score) in score_pos_list:
                     if (pos < coord_start or pos > coord_start): #needs to be edited
-                        res_scan[matrix][seq].remove((pos, score))
+                        score_pos_list.remove_pos_score((pos, score))
     return res_scan
+    
 
 def generatedFiles():
     """Renvoie une liste de type str contenant
