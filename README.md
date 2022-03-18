@@ -1,18 +1,17 @@
 TP4 - Recherche d’occurrences de matrices PFM dans un ensemble de séquences
 ===========================================================================
-
-    Recherche pour un ensemble de séquences
-    Le module de gestion des arguments argparse de Python
+Recherche pour un ensemble de séquences.  
+Le module de gestion des arguments argparse de Python
 
 ## L’objectif de ce TP est :
 
-    d’étendre le travail du TP3 pour la recherche d’occurrences d’une PFM pour un esnemble de séquences et non plus une seule séquence
+d’étendre le travail du TP3 pour la recherche d’occurrences d’une PFM pour un esnemble de séquences et non plus une seule séquence
 
 Recherche pour un ensemble de séquences
 
 Dans la suite du projet nous allons rechercher les occurrences de matrices dans un ensemble de séquences.
 
-    Ajouter à utils.py une fonction download_promotors qui, étant donné une liste d’identifiants de mRNA, une taille de séquence promotrice, un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés les séquences promotrices de ces mRNA au format FASTA. Les noms des fichiers seront les nom des identifiants mRNA suivi de la longueur du promoteur (par exemple, le promoteur de taille 100 de NM_007389 sera stocké dans le fichier NM_007389_100.fa).
+Ajouter à utils.py une fonction download_promotors qui, étant donné une liste d’identifiants de mRNA, une taille de séquence promotrice, un répertoire d’enregistrement (. par défaut), télécharge dans des fichiers séparés les séquences promotrices de ces mRNA au format FASTA. Les noms des fichiers seront les nom des identifiants mRNA suivi de la longueur du promoteur (par exemple, le promoteur de taille 100 de NM_007389 sera stocké dans le fichier NM_007389_100.fa).
 
 La construction d’un chemin valide se fait grâce à os.path.join (voir documentation de os.path)
 
@@ -42,7 +41,26 @@ Les identifiants des mRNA seront donnés en argument (et pas en option). Le scri
 
 Ce script préfigure le script de rendu final.
 
+## SET-UP
 
+* Un environement virtuel au nom de `virtual_env` a ete cree pour filtrer que les packages necessaires pour ce projet:
+```console
+pip install virtualenv
+python -m virtualenv virtual_env
+```
+* Pour activer l'environement virtuel:
+```console
+.\virtual_env\Scripts\activate  
+```
+* Apres avoir installer tout les packages necessaires. Pour les entregistrer dans un fichier `requirements.txt`
+```console
+pip freeze > requirements.txt
+```
+
+* Donc pour installer les packages necessaires il suffit d'executer la commande:
+```console
+pip install -r requirements.txt
+```
 
 TP3 - Recherche d’occurrences de matrices PFM
 =============================================
@@ -238,24 +256,24 @@ Calcul de score à partir de matrices de fréquences
 
 Nous allons maintenant utiliser Biopython pour trouver les endroits correspondant à des sites de fixation du facteur de transcription.
 
-- [ ] Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`.   
-- [ ] Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
+- [x] Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`.   
+- [x] Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
 
 Le chargement de ce type fichier (matrices de fréquences) se fait avec la méthode `read` du module `motifs` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.html#Bio.motifs.read)), en lui précisant que le format est `jaspar`.
 
-1.  - [ ] Combien de matrices ont été lues ?
+1.  - [x] Combien de matrices ont été lues ?
 
 Pour chaque entrée, la matrice est accessible via l’attribut `counts`, de type `FrequencyPositionMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.FrequencyPositionMatrix)).
 
-2.  - [ ] De quelle manière allez-vous pouvoir obtenir une matrice poids-position (_position-weight matrix_, PWM) ? Quelle valeur mettez-vous pour les pseudo-poids (_pseudocounts_) ? (souvenez-vous du cours…)
+2.  - [x] De quelle manière allez-vous pouvoir obtenir une matrice poids-position (_position-weight matrix_, PWM) ? Quelle valeur mettez-vous pour les pseudo-poids (_pseudocounts_) ? (souvenez-vous du cours…)
 
 Le résultat que vous obtenez doit dont être une PWM, de type `PositionWeightMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionWeightMatrix)).
 
-3.  - [ ] Comment obtenir une PSSM à partir de cette PWM ?
+3.  - [x] Comment obtenir une PSSM à partir de cette PWM ?
 
 La PSSM obtenue est de type `PositionSpecificScoringMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionSpecificScoringMatrix)).
 
-4.  - [ ] Réalisez une fonction qui, à partir d’une matrice de fréquence et de pseudo-poids, renvoie la PSSM correspondante.
+4.  - [x] Réalisez une fonction qui, à partir d’une matrice de fréquence et de pseudo-poids, renvoie la PSSM correspondante.
 
 5.  - [ ] Comment rechercher les occurrences d’une PSSM dans une séquence ?
 
