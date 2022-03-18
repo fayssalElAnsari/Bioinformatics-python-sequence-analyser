@@ -257,24 +257,24 @@ Calcul de score à partir de matrices de fréquences
 
 Nous allons maintenant utiliser Biopython pour trouver les endroits correspondant à des sites de fixation du facteur de transcription.
 
-- [ ] Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`.   
-- [ ] Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
+- [x] Nous allons travailler à partir du fichier que vous avez [téléchargé la semaine dernière sur JASPAR](TP1.html#sites-de-fixation-des-facteurs-de-transcription), à mettre dans votre répertoire `data/`.   
+- [x] Le module `motifs` de Biopython est celui qui nous intéressera pour rechercher les occurrences de PSSM. Chargez-le.
 
 Le chargement de ce type fichier (matrices de fréquences) se fait avec la méthode `read` du module `motifs` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.html#Bio.motifs.read)), en lui précisant que le format est `jaspar`.
 
-1.  - [ ] Combien de matrices ont été lues ?
+1.  - [x] Combien de matrices ont été lues ?
 
 Pour chaque entrée, la matrice est accessible via l’attribut `counts`, de type `FrequencyPositionMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.FrequencyPositionMatrix)).
 
-2.  - [ ] De quelle manière allez-vous pouvoir obtenir une matrice poids-position (_position-weight matrix_, PWM) ? Quelle valeur mettez-vous pour les pseudo-poids (_pseudocounts_) ? (souvenez-vous du cours…)
+2.  - [x] De quelle manière allez-vous pouvoir obtenir une matrice poids-position (_position-weight matrix_, PWM) ? Quelle valeur mettez-vous pour les pseudo-poids (_pseudocounts_) ? (souvenez-vous du cours…)
 
 Le résultat que vous obtenez doit dont être une PWM, de type `PositionWeightMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionWeightMatrix)).
 
-3.  - [ ] Comment obtenir une PSSM à partir de cette PWM ?
+3.  - [x] Comment obtenir une PSSM à partir de cette PWM ?
 
 La PSSM obtenue est de type `PositionSpecificScoringMatrix` ([documentation](https://biopython.org/docs/1.75/api/Bio.motifs.matrix.html?highlight=frequencypositionmatrix#Bio.motifs.matrix.PositionSpecificScoringMatrix)).
 
-4.  - [ ] Réalisez une fonction qui, à partir d’une matrice de fréquence et de pseudo-poids, renvoie la PSSM correspondante.
+4.  - [x] Réalisez une fonction qui, à partir d’une matrice de fréquence et de pseudo-poids, renvoie la PSSM correspondante.
 
 5.  - [ ] Comment rechercher les occurrences d’une PSSM dans une séquence ?
 

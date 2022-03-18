@@ -12,7 +12,7 @@ Entrez.email = "fayssal.el.ansari@gmail.com"
 
 
 def jaspar2pwm():
-    ''' 
+    '''
     cette fonction est la reponse a la premiere partie du TP3
     on genere une matrice de frequence on la normalise pour
     obtenir la PWM, a partir de cette matrice on genere la PSSM
@@ -117,14 +117,14 @@ def score_window(res_scan, coord_start, coord_stop):
                         res_scan[matrix][seq].remove((pos, score))
     return res_scan
 
-
-def main():
-    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
-    list_seq = []
+def generatedFiles():
     generated_files = []
     for mrna in LIST_MRNA:
         generated_files.append("./data/" + mrna + "_1024.fasta")
+    return generated_files
 
+def listSeq(generated_files):
+    list_seq = []
     for file_path in generated_files:
         list_seq.append(SeqIO.read(file_path, "fasta").seq)
 
@@ -137,6 +137,17 @@ def main():
         for matrix in matrices:
             print(matrix)
 
+def afficheMatrices(generated_files,list_seq,destMatricesJaspar):
+    for e in destMatricesJaspar:
+        afficheMatrice(generated_files,list_seq,e)
+
+def main():
+    # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
+    generated_files = generatedFiles()
+    list_seq = listSeq(generated_files)
+    afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
+    #l=["./data/MA0114.jaspar","./data/MA0056.jaspar"]
+    #afficheMatrices(generated_files,list_seq,l)
 
 if __name__ == "__main__":
     main()
