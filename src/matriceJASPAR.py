@@ -3,8 +3,11 @@ import urllib.request
 import sys
 
 def matriceJaspar(matrice):
-    """Creer dans le fichier jaspar dans le repertoire "../data", la matrice passer en paramètre 
-    matrice(str)
+    """Creer dans le fichier jaspar dans le repertoire "../data", la matrice passer en paramètre
+    matrice(str) : Matrice ID (pour une version spécifique), Base ID (pour la dèrniere version de cette matrice)
+
+    Exemple:
+    >>> matriceJaspar("MA0001")
     """
     link = "https://jaspar.genereg.net/api/v1/matrix/"+matrice+".jaspar"
     req_url = urllib.request.urlopen(link)
@@ -14,7 +17,7 @@ def matriceJaspar(matrice):
     fichier.close()
 
 def matricesJaspar(list_matrice):
-    """Creer dans le fichier jaspar dans le repertoire "../data", la matrice passer en paramètre 
+    """Creer dans le fichier jaspar dans le repertoire "../data", la matrice passer en paramètre
     list_matrice(list) : tous ses élément de type str
     """
     for e in list_matrice:
