@@ -127,11 +127,11 @@ def listSeq(generated_files):
     list_seq = []
     for file_path in generated_files:
         list_seq.append(SeqIO.read(file_path, "fasta").seq)
+    return list_seq
 
+def afficheMatrice(generated_files, list_seq, e):
     matrices = list()
-
-
-    with open("./data/MA0037.jaspar") as handle: # one matrix for starters
+    with open(e) as handle: # one matrix for starters
         for matrix in motifs.parse(handle, "jaspar"):
             pssm = pwm2pssm(matrix, 0.01, False)
             matrices.append(scan_all_sequences(pssm, list_seq, -20))
@@ -147,9 +147,8 @@ def main():
     generated_files = generatedFiles()
     list_seq = listSeq(generated_files)
     # afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
-    #l=["./data/MA0114.jaspar","./data/MA0056.jaspar"]
-    #afficheMatrices(generated_files,list_seq,l)
+    l=["./data/MA0037.jaspar","./data/MA0083.jaspar"]
+    afficheMatrices(generated_files,list_seq,l)
 
 if __name__ == "__main__":
     main()
-
