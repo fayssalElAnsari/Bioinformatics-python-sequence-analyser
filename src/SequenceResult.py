@@ -47,5 +47,9 @@ class SequenceResult:
         self._result.append(pos_score)
 
     def __str__(self):
-        return str(self.get_name()) + ": " + str(self.get_result())
+        name = str(self.get_name()) + ":\n\t\t"
+        str_result = ""
+        for seq in self.get_result():
+            str_result =  str_result + str(seq) + "\n\t\t"
+        return name + str_result
 
