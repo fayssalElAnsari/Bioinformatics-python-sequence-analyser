@@ -25,6 +25,7 @@ def find_cds(seqRecord):
                                     feature.location.end))
     return liste_positions
 
+
 def compare_rec_seq(record1, record2):
     '''
     cette fonction prend en parametre 2 records et les compare
