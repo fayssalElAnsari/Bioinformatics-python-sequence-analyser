@@ -1,6 +1,4 @@
-from .. import src
-
-import src
+from app.src import *
 
 import unittest
 
@@ -16,7 +14,7 @@ class test_scan_pwm(unittest.TestCase):
         """
         >> python src/scan_pwm.py MA0083.jaspar NM_007389 500 -20
         """
-        scan_pwm.main("MA0083.jaspar", "NM_007389", 500, -20)
+        # scan_pwm.main("MA0083.jaspar", "NM_007389", 500, -20)
         
 
     def test_MA0114_NM_007389(self):
