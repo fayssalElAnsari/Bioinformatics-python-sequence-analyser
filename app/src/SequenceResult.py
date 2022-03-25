@@ -31,7 +31,7 @@ class SequenceResult:
         self._seq = seq
 
 
-    def set_threshhold(self, threshold):
+    def set_threshold(self, threshold):
         self._threshold = threshold
 
 
