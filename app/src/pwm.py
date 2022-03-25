@@ -146,13 +146,50 @@ def score_window(res_scan:MatrixResult, coord_start, coord_stop):
     before = list()
     result = list()
     for matrix in res_scan.get_result():
-        print(len(matrix.get_result()))
+        # print(len(matrix.get_result()))
         for (pos, score) in matrix.get_result():
-            if (abs(pos) > coord_start and abs(pos) < coord_stop): #needs to be edited
+            if (pos > coord_start and pos < coord_stop): #needs to be edited
                 result.append((pos, score))
         break
-    print(len(result))
+    # print(len(result))
     return len(result)
+
+def best_window(res_scan:MatrixResult, window_size:int):
+    '''
+        Args:
+        pssm: A Position Specific Scoring Matrix
+        seq_list: The list of sequences to be scanned
+        threshold: the threshold to be taken in account in the scan
+
+    Returns:
+        A MatrixResult object containing the result of the scan 
+        for one matrix (pssm)
+
+    Raises:
+
+    '''
+    start = 0
+    end = window_size
+    result = {}
+    for scan_result in res_scan.get_result():
+        start = 0
+        end = window_size
+        limit = len(scan_result.get_seq()) # get the position of the end
+        result = {}
+        while(end <= limit):
+            result[(start, end)] = score_window(res_scan, start, end)
+            start = start + 1
+            end = end + 1
+        break
+    best_result = {}
+    for key, value in result.items():
+        if len(best_result) != 0:
+            if ( list(best_result.items())[0][1] < result[key]):
+                best_result = {key: value} 
+        else:
+            best_result = {key: value} 
+    print(best_result)
+    return best_result
     
 
 def generatedFiles():
@@ -193,7 +230,8 @@ def main():
     matrices.append(scan_all_sequences(pssm, list_seq, -20))
     for matrix in matrices:
         # print(matrix)
-        score_window(matrix, 0, 100)
+        # score_window(matrix, 0, 100)
+        best_window(matrix, 100)
         break
 
 
