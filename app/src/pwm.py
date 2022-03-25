@@ -143,12 +143,14 @@ def score_window(res_scan:MatrixResult, coord_start, coord_stop):
     étant donné un résultat de scan_all_sequences et des coordonnées
     début/fin dans les séquences, retourne le score de la fenêtre.
     '''
-    print(len(res_scan.get_result()))
+    before = list()
     result = list()
     for matrix in res_scan.get_result():
+        print(len(matrix.get_result()))
         for (pos, score) in matrix.get_result():
-            if (pos < coord_start or pos > coord_start): #needs to be edited
+            if (abs(pos) > coord_start and abs(pos) < coord_stop): #needs to be edited
                 result.append((pos, score))
+        break
     print(len(result))
     return len(result)
     
@@ -181,10 +183,7 @@ def main():
     list_seq=[]
     generated_files = generatedFiles()
     list_seq = listSeq(generated_files)
-    # afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
     l=["./data/MA0037.jaspar","./data/MA0083.jaspar"]
-    # afficheMatrices(generated_files, list_seq, l)
-
     matrices = list()
     for e in l:
         with open(e) as handle: # one matrix for starters
@@ -194,7 +193,7 @@ def main():
     matrices.append(scan_all_sequences(pssm, list_seq, -20))
     for matrix in matrices:
         # print(matrix)
-        score_window(matrix, 10, 100)
+        score_window(matrix, 0, 100)
         break
 
 
