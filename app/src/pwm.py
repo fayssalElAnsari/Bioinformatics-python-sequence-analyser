@@ -156,7 +156,10 @@ def score_window(res_scan:MatrixResult, coord_start, coord_stop):
 
 def best_window(res_scan:MatrixResult, window_size:int):
     '''
-        Args:
+    this function takes in as an argument a MatrixResult object
+    
+
+    Args:
         pssm: A Position Specific Scoring Matrix
         seq_list: The list of sequences to be scanned
         threshold: the threshold to be taken in account in the scan
