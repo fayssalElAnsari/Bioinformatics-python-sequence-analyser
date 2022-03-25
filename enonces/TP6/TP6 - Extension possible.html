@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" class=" ptjbztrac idc0_338" lang=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Département informatique – Université de Lille">
+  <title>TP6 - Extension possible</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="TP6%20-%20Extension%20possible_files/tufte.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body data-new-gr-c-s-check-loaded="8.896.0" data-gr-ext-installed="">
+<header id="title-block-header">
+<h1 class="title">TP6 - Extension possible</h1>
+<p class="author">Département informatique – Université de Lille</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#retour-sur-le-besoin">Retour sur le besoin</a></li>
+<li><a href="#echange-avec-votre-chef-de-projet">Echange avec votre chef de projet</a>
+<ul>
+<li><a href="#export-des-résultats">Export des résultats</a></li>
+<li><a href="#affichage">Affichage</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="retour-sur-le-besoin">Retour sur le besoin</h2>
+<p>Vous avez eu rendez-vous avec le biologiste qui avait passé commande 
+du logiciel que vous venez de produire. Il est très satisfait de pouvoir
+ enfin pouvoir séelctionner des fenêtre d’intérêt pour des facteurs de 
+transcription dans les promoteurs des gènes qui l’intéressent.</p>
+<p>Néanmoins il trouve que ce serait plus parlant avec une représentation graphique des résultats.</p>
+<p>Après lui avoir demandé ce qu’il souhaiterait, il vous a préparé un petit schéma :</p>
+<p><img src="TP6%20-%20Extension%20possible_files/schema.png" style="width: 100%"></p>
+<p>Chaque petit rectangle bleu reproduit une occurrence de la matrice 
+JASPAR recherchée, chaque ligne le promoteur d’un des gènes passés en 
+paramètre et le rectangle rouge montre une fenêtre sélectionnée.</p>
+<p>Il indique que si en plus il pouvait y avoir une gradation de bleu 
+suivant le score de la matricece serait super. Et si en plus on pouvait 
+avoir une fenêtre surgissante indiquant le score et la position exacte, y
+ compris pour la fenêtre d’intérêt, ce serait topissime.</p>
+<h2 id="echange-avec-votre-chef-de-projet">Echange avec votre chef de projet</h2>
+<p>De retour avec votre chef de projet, celui-ci vous propose de prendre l’approche suivante.</p>
+<ul>
+<li>on met de côté le ‘super’ et le ‘topissime’ dans un premier temps,</li>
+<li>tant qu’à produire un affichage, autant le rendre indépendant du 
+programme de calcul, on passera donc par un export des résulats qui 
+seront ensuite rechargés pour l’affichage</li>
+</ul>
+<p>En terme de technologie il vous indique de faire simple.</p>
+<ul>
+<li>l’export sera réalisé via JSON (car en Python c’est facile : ne le faites pas «&nbsp;<em>à la main</em>&nbsp;» mais utilisez le module Python correspondant)</li>
+<li>l’affichage dans un canevas Javascript (car en Javascript ce sera facile de charger le JSON)</li>
+</ul>
+<h3 id="export-des-résultats">Export des résultats</h3>
+<p>De manière générale, et c’est particulièrement vrai en 
+bioinformatique, il est important que les résultats produits par un 
+programme soit exploitables facilement. Pour cela les résultats doivent 
+être produits dans un format standard, facilement lisible.</p>
+<p>Pour cela faites produire à votre programme un fichier de sortie au format JSON (dont le nom sera spécifié par une option <code>-o</code> ou <code>--output</code>),
+ qui contient à la fois les informations nécessaires pour exploiter les 
+résultats, mais également les paramètres utilisés pour obtenir ces 
+résultats (afin de garder la traçabilité de la façon dont ont été 
+obtenus les résultats).</p>
+<p>Vous décrirez ce format dans votre <code>README.md</code>.</p>
+<div class="note">
+<p>On peut facilement exporter un dictionnaire Python au format JSON grâce au <a href="https://docs.python.org/fr/3.8/library/json.html">module JSON</a>.</p>
+</div>
+<h3 id="affichage">Affichage</h3>
+<p>Créer un fichier HTML/JavaScript avec un bouton permettant de charger
+ un fichier JSON et de dessiner le contenu pour obtenir un affichage des
+ résultats tel qu’attendu par le biologiste.</p>
+<div class="note">
+<p>Un exemple de <a href="https://www.fil.univ-lille.fr/~salson/portail/bioinfo-s6/data/index.html">page web</a>, avec du <a href="https://www.fil.univ-lille.fr/~salson/portail/bioinfo-s6/data/main.js">code Javascript</a> et un <a href="https://www.fil.univ-lille.fr/~salson/portail/bioinfo-s6/data/test.json">fichier JSON</a> qui dessine des rectangles dont des coordonnées sont fournies dans le fichier JSON.</p>
+</div>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
