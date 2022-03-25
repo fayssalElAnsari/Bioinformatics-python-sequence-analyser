@@ -1,3 +1,5 @@
+from .. import src
+
 import src
 
 import unittest
