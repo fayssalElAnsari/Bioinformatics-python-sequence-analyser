@@ -143,13 +143,14 @@ def score_window(res_scan:MatrixResult, coord_start, coord_stop):
     étant donné un résultat de scan_all_sequences et des coordonnées
     début/fin dans les séquences, retourne le score de la fenêtre.
     '''
-    for matrix in res_scan:
-        for sequences in matrix.get_result():
-            for score_pos_list in sequences.get_result():
-                for (pos, score) in score_pos_list:
-                    if (pos < coord_start or pos > coord_start): #needs to be edited
-                        score_pos_list.remove_pos_score((pos, score))
-    return res_scan
+    print(len(res_scan.get_result()))
+    result = list()
+    for matrix in res_scan.get_result():
+        for (pos, score) in matrix.get_result():
+            if (pos < coord_start or pos > coord_start): #needs to be edited
+                result.append((pos, score))
+    print(len(result))
+    return len(result)
     
 
 def generatedFiles():
@@ -174,21 +175,6 @@ def listSeq(generated_files):
     return list_seq
 
 
-def afficheMatrice(generated_files, list_seq, e):
-    matrices = list()
-    with open(e) as handle: # one matrix for starters
-        for matrix in motifs.parse(handle, "jaspar"):
-            pssm = pwm2pssm(matrix, 0.01, False)
-            matrices.append(scan_all_sequences(pssm, list_seq, -20))
-        for matrix in matrices:
-            print(matrix)
-
-
-def afficheMatrices(generated_files, list_seq, destMatricesJaspar):
-    for e in destMatricesJaspar:
-        afficheMatrice(generated_files, list_seq, e)
-
-
 def main():
     # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
     generated_files=[]
@@ -207,8 +193,9 @@ def main():
                 matrices.append(scan_all_sequences(pssm, list_seq, -20))
     matrices.append(scan_all_sequences(pssm, list_seq, -20))
     for matrix in matrices:
-        print(matrix)
-    # score_window()
+        # print(matrix)
+        score_window(matrix, 10, 100)
+        break
 
 
 if __name__ == "__main__":
