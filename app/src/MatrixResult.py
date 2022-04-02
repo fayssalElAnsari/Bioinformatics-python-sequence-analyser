@@ -28,7 +28,7 @@ class MatrixResult:
 
 
     def set_threshhold(self, threshold):
-        self._threhold = threshold
+        self._threshold = threshold
 
 
     def set_matrix(self, matrix):
@@ -41,6 +41,7 @@ class MatrixResult:
 
     def append_scan_result(self, seq_pos_score):
         self._result.append(seq_pos_score)
+
 
     def __str__(self):
         name = "* " + str(self.get_name()) + ":\n\t"

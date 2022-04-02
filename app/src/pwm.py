@@ -44,18 +44,27 @@ def jaspar2pwm():
             # motifs.calculate(m)
             count = count + 1
 
-    # print("Le nombre des matrices lus: " + str(count))
 
-
-def pwm2pssm(matrix, pseudo_weight, v = False):
+def pwm2pssm(fpm, pseudo_weight, v = False):
     '''
-    cette fonction converti une PWM en une PSSM
+    This function converts a PWM into a PSSM
+
+    Args:
+        fpm: Frequency Position Matrix in JASPAR format
+        psuedo_weight: to be passed into the normalize function
+        v: is set to true adds verbosity
+
+    Returns:
+        A Position Specific Scoring Matrix
+
+    Raises:
+
     '''
     if v:
-        print(matrix)
-        print("normalizing...")
+        print(fpm)
+        print("Normalizing...")
         print("PWM with pseudo wieght of: ", pseudo_weight)
-    pwm2 = matrix.counts.normalize(pseudo_weight)
+    pwm2 = fpm.counts.normalize(pseudo_weight)
     if v:
         print("PSSM")
     pssm = pwm2.log_odds()
@@ -64,11 +73,23 @@ def pwm2pssm(matrix, pseudo_weight, v = False):
     return pssm
 
 
-def scan_sequence(pssm, seqstring, seuil):
+def scan_sequence(pssm, seqstring, threshold):
     '''
-    scan l'existance d'une sequence au dessus d'un seuil dans une PSSM
+    Scan l'existance d'une sequence au dessus d'un threshold dans une PSSM
     renvoie une liste de (position, score) pour la 'pssm' dans 'seqstring'
     returns: the result as an instance of the class SequenceResult
+
+    Args:
+        pssm: A Position Specific Scoring Matrix
+        seqstring: The sequence to be scanned
+        threshold: the threshold to be taken in account in the scan
+
+    Returns:
+        A SequenceResult object containing the list of (pos, score)
+        for the given sequence scan
+
+    Raises:
+        
     '''
     seq = Seq(seqstring)
 
@@ -76,46 +97,102 @@ def scan_sequence(pssm, seqstring, seuil):
     scan.set_name(seqstring) # maybe change it later to something simpler
     scan.set_seq(seq)
     scan.set_matrix(pssm)
-    scan.set_threshhold(seuil)
-    # print("recherche de la Seq(" + seqstring + ") avec un seuil de ", seuil , " : ")
+    scan.set_threshold(threshold)
+    # print("recherche de la Seq(" + seqstring + ") avec un threshold de ", threshold , " : ")
     try:
-        for position, score in pssm.search(seq, seuil):
+        for position, score in pssm.search(seq, threshold):
             scan.append_pos_score((position, score))
     except:
         pass
     return scan
 
 
-def scan_all_sequences(pssm, seq_list, seuil):
+def scan_all_sequences(pssm, seq_list, threshold):
     '''
-    applique la fonction `scan_sequence()` deja definie sur une liste de sequences
+    Applique la fonction `scan_sequence()` deja definie sur une liste de sequences
     et retourne le resultat sous forme de liste de liste
     pour chaque pmid la liste de (pos, score) qui lui correspond
     returns: the result as an instance of the class MatrixResult
+    
+    Args:
+        pssm: A Position Specific Scoring Matrix
+        seq_list: The list of sequences to be scanned
+        threshold: the threshold to be taken in account in the scan
+
+    Returns:
+        A MatrixResult object containing the result of the scan 
+        for one matrix (pssm)
+
+    Raises:
+
+
     '''
     scan = MatrixResult()
     scan.set_name(pssm.consensus)
     scan.set_matrix(pssm)
     scan.set_seq_list(seq_list)
-    scan.set_threshhold(seuil)
+    scan.set_threshhold(threshold)
 
     for seq in seq_list:
-        scan.append_scan_result(scan_sequence(pssm, seq, seuil))
+        scan.append_scan_result(scan_sequence(pssm, seq, threshold))
     return scan
 
 
-def score_window(res_scan, coord_start, coord_stop):
+def score_window(res_scan:MatrixResult, coord_start, coord_stop):
     '''
     étant donné un résultat de scan_all_sequences et des coordonnées
     début/fin dans les séquences, retourne le score de la fenêtre.
     '''
-    for matrix in res_scan:
-        for sequences in matrix.get_result():
-            for score_pos_list in sequences.get_result():
-                for (pos, score) in score_pos_list:
-                    if (pos < coord_start or pos > coord_start): #needs to be edited
-                        score_pos_list.remove_pos_score((pos, score))
-    return res_scan
+    before = list()
+    result = list()
+    for matrix in res_scan.get_result():
+        # print(len(matrix.get_result()))
+        for (pos, score) in matrix.get_result():
+            if (pos > coord_start and pos < coord_stop): #needs to be edited
+                result.append((pos, score))
+        break
+    # print(len(result))
+    return len(result)
+
+def best_window(res_scan:MatrixResult, window_size:int):
+    '''
+    this function takes in as an argument a MatrixResult object
+    
+
+    Args:
+        pssm: A Position Specific Scoring Matrix
+        seq_list: The list of sequences to be scanned
+        threshold: the threshold to be taken in account in the scan
+
+    Returns:
+        A MatrixResult object containing the result of the scan 
+        for one matrix (pssm)
+
+    Raises:
+
+    '''
+    start = 0
+    end = window_size
+    result = {}
+    for scan_result in res_scan.get_result():
+        start = 0
+        end = window_size
+        limit = len(scan_result.get_seq()) # get the position of the end
+        result = {}
+        while(end <= limit):
+            result[(start, end)] = score_window(res_scan, start, end)
+            start = start + 1
+            end = end + 1
+        break
+    best_result = {}
+    for key, value in result.items():
+        if len(best_result) != 0:
+            if ( list(best_result.items())[0][1] < result[key]):
+                best_result = {key: value} 
+        else:
+            best_result = {key: value} 
+    print(best_result)
+    return best_result
     
 
 def generatedFiles():
@@ -140,31 +217,27 @@ def listSeq(generated_files):
     return list_seq
 
 
-def afficheMatrice(generated_files, list_seq, e):
-    matrices = list()
-    with open(e) as handle: # one matrix for starters
-        for matrix in motifs.parse(handle, "jaspar"):
-            pssm = pwm2pssm(matrix, 0.01, False)
-            matrices.append(scan_all_sequences(pssm, list_seq, -20))
-        for matrix in matrices:
-            print(matrix)
-
-
-def afficheMatrices(generated_files, list_seq, destMatricesJaspar):
-    for e in destMatricesJaspar:
-        afficheMatrice(generated_files, list_seq, e)
-
-
 def main():
     # generated_files = download_promotors(LIST_MRNA, 1024, "../data") #comment to use local files
     generated_files=[]
     list_seq=[]
     generated_files = generatedFiles()
     list_seq = listSeq(generated_files)
-    # afficheMatrice(generated_files,list_seq,"./data/MA0114.jaspar")
     l=["./data/MA0037.jaspar","./data/MA0083.jaspar"]
-    afficheMatrices(generated_files,list_seq,l)
+    matrices = list()
+    for e in l:
+        with open(e) as handle: # one matrix for starters
+            for matrix in motifs.parse(handle, "jaspar"):
+                pssm = pwm2pssm(matrix, 0.01, False)
+                matrices.append(scan_all_sequences(pssm, list_seq, -20))
+    matrices.append(scan_all_sequences(pssm, list_seq, -20))
+    for matrix in matrices:
+        # print(matrix)
+        # score_window(matrix, 0, 100)
+        best_window(matrix, 100)
+        break
 
 
 if __name__ == "__main__":
     main()
+

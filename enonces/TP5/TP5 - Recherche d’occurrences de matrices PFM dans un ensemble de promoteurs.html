@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="" class=" pfvxbeocg idc0_338 cgotpjvar lsbggsotq" lang=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="author" content="Département informatique – Université de Lille">
+  <title>TP5 - Recherche d’occurrences de matrices PFM dans un ensemble de promoteurs</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="TP5%20-%20Recherche%20d%E2%80%99occurrences%20de%20matrices%20PFM%20dans%20un%20ensemble%20de%20promoteurs_files/tufte.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body data-new-gr-c-s-check-loaded="8.896.0" data-gr-ext-installed="">
+<header id="title-block-header">
+<h1 class="title">TP5 - Recherche d’occurrences de matrices PFM dans un ensemble de promoteurs</h1>
+<p class="author">Département informatique – Université de Lille</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#rendu-final">Rendu final</a></li>
+<li><a href="#extension-avec-affichage-des-résultats">Extension avec affichage des résultats</a></li>
+</ul>
+</nav>
+<p>L’objectif de ce TP est :</p>
+<ul>
+<li>de finaliser la partie du TP4&nbsp;;</li>
+<li>de finaliser les commentaires et tests unitaires de l’ensemble des fonctions développées&nbsp;;</li>
+<li>de mettre en place le script de rendu final&nbsp;;</li>
+<li>éventuellement développer l’extension proposée.</li>
+</ul>
+<h2 id="rendu-final">Rendu final</h2>
+<p>Pour le <strong>25 mars 2022, 18h</strong> (jour et heure de relevé final de votre dépôt), vous devez avoir réalisé un script python nommé <code>putative_TFBS.py</code>, qui s’exécute en ligne de commande, prend en argument&nbsp;:</p>
+<ul>
+<li>un fichier contenant une matrice JASPAR&nbsp;;</li>
+<li>une liste d’identifiants Genbank de mRNA&nbsp;;</li>
+<li>une taille pour la séquence promotrice&nbsp;;</li>
+<li>un seuil de score de matrice&nbsp;;</li>
+<li>une taille de fenêtre&nbsp;;</li>
+<li>un seuil de score pour les fenêtres.</li>
+</ul>
+<p>Les paramètres seront fournis de la manière suivante&nbsp;:</p>
+<ul>
+<li><code>-m</code> pour le fichier contenant la matrice (option longue <code>--pfm</code>, pas de valeur par défaut)&nbsp;;</li>
+<li><code>-t</code> pour le seuil de score de matrice (option longue <code>--threshold</code>, pas de valeur par défaut)&nbsp;;</li>
+<li><code>-l</code> pour la longueur du promoteur (option longue <code>--promotor-length</code>, par défaut 1000)&nbsp;;</li>
+<li><code>-w</code> pour la longueur de la fenêtre glissante (option longue <code>--window-size</code>, par défaut 40)&nbsp;;</li>
+<li><code>-s</code> pour le seuil de score de fenêtre (option longue <code>--window-threshold</code>, pas de valeur par défaut)&nbsp;;</li>
+<li><code>-p</code> pour la valeur du pseudo-poids (option longue <code>--pseudocount</code>, valeur par défaut 0.1).</li>
+</ul>
+<p>Ce script produit sur la sortie standard une liste d’occurrences de 
+fenêtres respectant l’affichage suivant, séparé en 5 champs&nbsp;:</p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Champ 1</th>
+<th>Champ 2</th>
+<th>Champ 3</th>
+<th>Champ 4</th>
+<th>Champ 5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>numéro de fenêtre</td>
+<td>nom du facteur de transcription</td>
+<td>fenêtre d’occurrence</td>
+<td>score de la fenêtre</td>
+<td>nombre d’occurrences du TFBS</td>
+</tr>
+</tbody>
+</table>
+<p>Par exemple (exemple fictif)&nbsp;:</p>
+<pre><code>1 Ahr::Arnt [-134:-104] 16.19 5
+2 Ahr::Arnt [-524:-494] 15.74 8</code></pre>
+<p>Les positions négatives font ici référence aux positions en amont du 
+début du gène (si la longueur du promoteur est 1000, la position -134 
+signifie la position 1000-134+1=867 dans la séquence promotrice).</p>
+<p>Puis, pour chaque fenêtre, la liste des occurrences du motif dans cette fenêtre, avec sur chaque ligne&nbsp;:</p>
+<ul>
+<li>numéro de la fenêtre</li>
+<li>numéro NM</li>
+<li>nom du facteur</li>
+<li>position</li>
+<li>score</li>
+</ul>
+<p>Par exemple (exemple toujours fictif)&nbsp;:</p>
+<pre><code>1 NM_00789 Ahr::Arnt -122 6.27
+1 NM_00789 Ahr::Arnt -116 5.87
+1 NM_004320 Ahr::Arnt -126 8.70
+1 NM_001100 Ahr::Arnt -118 3.66
+1 NM_006757 Ahr::Arnt -121 12.54</code></pre>
+<p>On prendra soin que l’exécution de <code>python3 putative_TFBS.py --help</code> produise un message clair permettant de comprendre la signification des paramètres.</p>
+<h2 id="extension-avec-affichage-des-résultats">Extension avec affichage des résultats</h2>
+<p>Nous vous proposons quelques améliorations afin de prolonger le projet. Voir le sujet du <a href="https://www.fil.univ-lille.fr/~salson/portail/bioinfo-s6/TP6.html">TP6</a>.</p>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
